@@ -1,0 +1,32 @@
+{
+  "name": "college-erp-mern",
+  "version": "1.0.0",
+  "description": "College ERP System with MERN Stack",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon backend/server.js",
+    "client": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "install-all": "npm install && cd frontend && npm install",
+    "start": "node backend/server.js"
+  },
+  "keywords": ["mern", "college", "erp", "react", "node", "express", "mongodb"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2",
+    "concurrently": "^8.2.2"
+  }
+}
