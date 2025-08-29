@@ -90,51 +90,6 @@ npm install
 cd ..
 ```
 
-### 3. Environment Setup
-
-1. Copy the environment template:
-   ```bash
-   cp env.example .env
-   ```
-
-2. Update the `.env` file with your configuration:
-   ```env
-   NODE_ENV=development
-   PORT=5000
-   MONGO_URI=mongodb://localhost:27017/college_erp
-   JWT_SECRET=your_super_secret_jwt_key_here_change_in_production
-   JWT_EXPIRE=30d
-   ```
-
-### 4. Start MongoDB
-
-Make sure MongoDB is running on your system or update the `MONGO_URI` to point to your cloud MongoDB instance.
-
-### 5. Run the Application
-
-#### Development Mode (Concurrent Frontend + Backend)
-```bash
-npm run dev
-```
-
-This will start both the backend server (port 5000) and frontend dev server (port 3000) concurrently.
-
-#### Individual Services
-
-**Backend Only:**
-```bash
-npm run server
-```
-
-**Frontend Only:**
-```bash
-npm run client
-```
-
-**Production Build:**
-```bash
-npm run build
-```
 
 ## 🌐 API Endpoints
 
@@ -205,25 +160,6 @@ The application uses TailwindCSS for styling. You can customize the design by:
 1. Run `npm run build` to create production build
 2. Deploy the `frontend/dist` folder to platforms like Vercel, Netlify, or AWS S3
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🆘 Support
-
-If you encounter any issues or have questions:
-1. Check the existing issues
-2. Create a new issue with detailed information
-3. Contact the development team
-
 ## 🔮 Future Enhancements
 
 - [ ] Real-time notifications
@@ -237,6 +173,3 @@ If you encounter any issues or have questions:
 - [ ] Calendar integration
 - [ ] Grade management system
 
----
-
-**Happy Coding! 🎓✨**
