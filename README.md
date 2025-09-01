@@ -63,34 +63,6 @@ college-erp-mern/
 └── README.md               # This file
 ```
 
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Node.js (v16 or higher)
-- MongoDB (local or cloud instance)
-- npm or yarn
-
-### 1. Clone the Repository
-
-```bash
-git clone <repository-url>
-cd college-erp-mern
-```
-
-### 2. Install Dependencies
-
-```bash
-# Install root dependencies
-npm install
-
-# Install frontend dependencies
-cd frontend
-npm install
-cd ..
-```
-
-
 ## 🌐 API Endpoints
 
 ### Authentication
