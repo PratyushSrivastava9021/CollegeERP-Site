@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
+import { useNavigate } from 'react-router-dom' // ADD THIS IMPORT
 import { courseAPI } from '../utils/api'
 import { 
   BookOpen, 
@@ -9,12 +10,14 @@ import {
   Clock,
   MapPin,
   User,
-  GraduationCap
+  GraduationCap,
+  ChevronRight // ADD THIS IMPORT
 } from 'lucide-react'
 import { formatRole, formatDepartment, formatDate } from '../utils/helpers'
 
 const Dashboard = () => {
   const { user } = useAuth()
+  const navigate = useNavigate() // ADD THIS
   const [enrolledCourses, setEnrolledCourses] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -35,6 +38,20 @@ const Dashboard = () => {
     } finally {
       setLoading(false)
     }
+  }
+
+  // ADD THESE CLICK HANDLERS
+  const handleBrowseCourses = () => {
+    navigate('/courses')
+  }
+
+  const handleUpdateProfile = () => {
+    navigate('/profile')
+  }
+
+  const handleViewSchedule = () => {
+    // You can navigate to a schedule page or show a modal
+    alert('Schedule feature coming soon!')
   }
 
   const stats = [
@@ -67,7 +84,7 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-600"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
       </div>
     )
   }
@@ -75,14 +92,14 @@ const Dashboard = () => {
   return (
     <div className="space-y-6">
       {/* Welcome Section */}
-      <div className="bg-gradient-to-r from-primary-600 to-primary-700 rounded-lg p-6 text-white">
+      <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg p-6 text-white">
         <div className="flex items-center space-x-4">
           <div className="h-16 w-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
             <GraduationCap className="h-8 w-8" />
           </div>
           <div>
             <h1 className="text-2xl font-bold">Welcome back, {user?.name}!</h1>
-            <p className="text-primary-100">
+            <p className="text-blue-100">
               Here's what's happening with your academic journey today.
             </p>
           </div>
@@ -109,24 +126,42 @@ const Dashboard = () => {
         })}
       </div>
 
-      {/* Quick Actions */}
+      {/* Quick Actions - UPDATED WITH CLICK HANDLERS */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200">
         <div className="p-6 border-b border-gray-200">
           <h2 className="text-lg font-semibold text-gray-900">Quick Actions</h2>
         </div>
         <div className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <button className="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-              <BookOpen className="h-5 w-5 text-primary-600 mr-3" />
-              <span className="text-sm font-medium text-gray-900">Browse Courses</span>
+            <button 
+              onClick={handleBrowseCourses}
+              className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors group"
+            >
+              <div className="flex items-center">
+                <BookOpen className="h-5 w-5 text-blue-600 mr-3" />
+                <span className="text-sm font-medium text-gray-900">Browse Courses</span>
+              </div>
+              <ChevronRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600" />
             </button>
-            <button className="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-              <User className="h-5 w-5 text-primary-600 mr-3" />
-              <span className="text-sm font-medium text-gray-900">Update Profile</span>
+            <button 
+              onClick={handleUpdateProfile}
+              className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors group"
+            >
+              <div className="flex items-center">
+                <User className="h-5 w-5 text-blue-600 mr-3" />
+                <span className="text-sm font-medium text-gray-900">Update Profile</span>
+              </div>
+              <ChevronRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600" />
             </button>
-            <button className="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-              <Calendar className="h-5 w-5 text-primary-600 mr-3" />
-              <span className="text-sm font-medium text-gray-900">View Schedule</span>
+            <button 
+              onClick={handleViewSchedule}
+              className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors group"
+            >
+              <div className="flex items-center">
+                <Calendar className="h-5 w-5 text-blue-600 mr-3" />
+                <span className="text-sm font-medium text-gray-900">View Schedule</span>
+              </div>
+              <ChevronRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600" />
             </button>
           </div>
         </div>
@@ -141,10 +176,10 @@ const Dashboard = () => {
           <div className="p-6">
             <div className="space-y-4">
               {enrolledCourses.map((course) => (
-                <div key={course._id} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                <div key={course._id} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer">
                   <div className="flex items-center space-x-4">
-                    <div className="h-12 w-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                      <BookOpen className="h-6 w-6 text-primary-600" />
+                    <div className="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                      <BookOpen className="h-6 w-6 text-blue-600" />
                     </div>
                     <div>
                       <h3 className="font-medium text-gray-900">{course.title}</h3>
