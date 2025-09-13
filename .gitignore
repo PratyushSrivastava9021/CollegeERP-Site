@@ -8,12 +8,20 @@ node_modules/
 .env.development.local
 .env.test.local
 .env.production.local
+backend/.env
+
+# Database
+data/
+*.mongodb
 
 # Build outputs
 dist/
 build/
 */dist/
 */build/
+frontend/dist/
+frontend/.vite/
+backend/dist/
 
 # Logs
 logs
