@@ -95,6 +95,9 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [animateStats, setAnimateStats] = useState(false);
+  const [showPricing, setShowPricing] = useState(false);
+  const [billingCycle, setBillingCycle] = useState('monthly');
+  const [showCeoMessage, setShowCeoMessage] = useState(false);
   
   const [formData, setFormData] = useState({
     name: user?.name || '',
@@ -1164,7 +1167,10 @@ const Profile = () => {
                     <p className="font-semibold text-white">Premium Features</p>
                   </div>
                   <p className="text-sm text-gray-300 mb-4">Unlock advanced analytics, custom themes, and priority support.</p>
-                  <button className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-black py-3 rounded-xl font-semibold hover:from-cyan-400 hover:to-blue-400 transition-all">
+                  <button 
+                    onClick={() => setShowPricing(true)}
+                    className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 text-black py-3 rounded-xl font-semibold hover:from-cyan-400 hover:to-blue-400 transition-all"
+                  >
                     Upgrade to Premium
                   </button>
                 </div>
@@ -1176,6 +1182,219 @@ const Profile = () => {
                   <button className="w-full flex items-center px-6 py-4 bg-red-500/20 hover:bg-red-500/30 rounded-2xl transition-colors text-red-400 font-medium border border-red-400/30">
                     <X className="h-5 w-5 mr-3" />
                     Deactivate Account
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Premium Pricing Modal */}
+        {showPricing && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center animate-fade-in">
+            <div className="fixed inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setShowPricing(false)} />
+            <div className="relative max-w-4xl w-full mx-4 card-premium neon-border animate-slide-up">
+              <button
+                onClick={() => setShowPricing(false)}
+                className="absolute top-6 right-6 p-2 rounded-xl bg-gray-800/50 hover:bg-gray-700/50 text-gray-400 hover:text-white transition-all z-10"
+              >
+                <X className="h-6 w-6" />
+              </button>
+              
+              <div className="p-8">
+                <div className="text-center mb-8">
+                  <h2 className="text-4xl font-black gradient-text mb-4">Pricing</h2>
+                  <p className="text-xl text-gray-300">Get started for Free. Upgrade to increase limits.</p>
+                </div>
+
+                {/* Billing Toggle */}
+                <div className="flex justify-center mb-8">
+                  <div className="bg-gray-800/50 p-1 rounded-2xl border border-gray-700/50">
+                    <button
+                      onClick={() => setBillingCycle('monthly')}
+                      className={`px-6 py-3 rounded-xl font-semibold transition-all ${
+                        billingCycle === 'monthly'
+                          ? 'bg-gray-700 text-white'
+                          : 'text-gray-400 hover:text-white'
+                      }`}
+                    >
+                      Monthly
+                    </button>
+                    <button
+                      onClick={() => setBillingCycle('yearly')}
+                      className={`px-6 py-3 rounded-xl font-semibold transition-all relative ${
+                        billingCycle === 'yearly'
+                          ? 'bg-gray-700 text-white'
+                          : 'text-gray-400 hover:text-white'
+                      }`}
+                    >
+                      Yearly
+                      <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full">
+                        Save 25%
+                      </span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Pricing Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Free Plan */}
+                  <div className="bg-gray-900/50 border border-gray-700/50 rounded-3xl p-8">
+                    <div className="mb-6">
+                      <h3 className="text-2xl font-bold text-white mb-2">Free</h3>
+                      <div className="flex items-baseline">
+                        <span className="text-5xl font-bold text-white">$0</span>
+                      </div>
+                      <p className="text-gray-400 mt-2">per month, no credit card required</p>
+                    </div>
+                    
+                    <button className="w-full bg-gray-700 text-white py-4 rounded-2xl font-semibold mb-6 hover:bg-gray-600 transition-all">
+                      Go For Free
+                    </button>
+                    
+                    <div className="space-y-3 text-sm">
+                      <div className="flex items-center text-gray-300">
+                        <CheckCircle2 className="h-4 w-4 mr-3 text-green-400" />
+                        10 Fast requests and 50 Slow requests of Premium models / month
+                      </div>
+                      <div className="flex items-center text-gray-300">
+                        <CheckCircle2 className="h-4 w-4 mr-3 text-green-400" />
+                        1000 Requests of Advanced models / month
+                      </div>
+                      <div className="flex items-center text-gray-300">
+                        <CheckCircle2 className="h-4 w-4 mr-3 text-green-400" />
+                        5000 Autocomplete / month
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Pro Plan */}
+                  <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 border border-green-400/30 rounded-3xl p-8 relative">
+                    <div className="absolute top-4 right-4 bg-green-500 text-white text-xs px-3 py-1 rounded-full font-bold">
+                      Recommended
+                    </div>
+                    
+                    <div className="mb-6">
+                      <h3 className="text-2xl font-bold text-white mb-2">Pro</h3>
+                      <div className="flex items-baseline">
+                        <span className="text-5xl font-bold text-white">
+                          ${billingCycle === 'monthly' ? '3' : '2.25'}
+                        </span>
+                        {billingCycle === 'yearly' && (
+                          <span className="text-2xl text-gray-400 line-through ml-2">$3</span>
+                        )}
+                      </div>
+                      <p className="text-gray-400 mt-2">
+                        {billingCycle === 'yearly' && (
+                          <span className="text-green-400 font-semibold mr-2">1st Month Discount</span>
+                        )}
+                        ${billingCycle === 'monthly' ? '10' : '27'} from the second month, billed {billingCycle}
+                      </p>
+                    </div>
+                    
+                    <button 
+                      onClick={() => setShowCeoMessage(true)}
+                      className="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white py-4 rounded-2xl font-semibold mb-6 hover:from-green-600 hover:to-emerald-600 transition-all shadow-lg">
+                      Get started with Prat Verse
+                    </button>
+                    
+                    <div className="space-y-3 text-sm">
+                      <div className="flex items-center text-gray-300">
+                        <CheckCircle2 className="h-4 w-4 mr-3 text-green-400" />
+                        600 Fast requests and unlimited Slow requests of Premium models / month
+                      </div>
+                      <div className="flex items-center text-gray-300">
+                        <CheckCircle2 className="h-4 w-4 mr-3 text-green-400" />
+                        Unlimited Requests of Advanced models
+                      </div>
+                      <div className="flex items-center text-gray-300">
+                        <CheckCircle2 className="h-4 w-4 mr-3 text-green-400" />
+                        Unlimited Autocomplete
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Payment Methods */}
+                <div className="mt-8 text-center">
+                  <p className="text-gray-400 mb-4">Most payment methods supported</p>
+                  <div className="flex justify-center items-center space-x-4 opacity-60">
+                    <div className="w-8 h-8 bg-gray-600 rounded flex items-center justify-center">
+                      <span className="text-xs font-bold text-white">♿</span>
+                    </div>
+                    <div className="w-12 h-8 bg-blue-600 rounded flex items-center justify-center">
+                      <span className="text-xs font-bold text-white">PP</span>
+                    </div>
+                    <div className="w-12 h-8 bg-gray-700 rounded flex items-center justify-center">
+                      <span className="text-xs font-bold text-white">💳</span>
+                    </div>
+                    <div className="w-12 h-8 bg-blue-700 rounded flex items-center justify-center">
+                      <span className="text-xs font-bold text-white">VISA</span>
+                    </div>
+                    <div className="w-12 h-8 bg-red-600 rounded flex items-center justify-center">
+                      <span className="text-xs font-bold text-white">MC</span>
+                    </div>
+                    <div className="w-12 h-8 bg-blue-800 rounded flex items-center justify-center">
+                      <span className="text-xs font-bold text-white">AE</span>
+                    </div>
+                    <div className="w-12 h-8 bg-orange-600 rounded flex items-center justify-center">
+                      <span className="text-xs font-bold text-white">DC</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* CEO Message Modal */}
+        {showCeoMessage && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center animate-fade-in">
+            <div className="fixed inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setShowCeoMessage(false)} />
+            <div className="relative max-w-2xl w-full mx-4 card-premium neon-border animate-slide-up">
+              <button
+                onClick={() => setShowCeoMessage(false)}
+                className="absolute top-6 right-6 p-2 rounded-xl bg-gray-800/50 hover:bg-gray-700/50 text-gray-400 hover:text-white transition-all z-10"
+              >
+                <X className="h-6 w-6" />
+              </button>
+              
+              <div className="p-8">
+                <div className="text-center mb-8">
+                  <Crown className="h-16 w-16 text-yellow-400 mx-auto mb-4" />
+                  <h2 className="text-3xl font-black gradient-text mb-2">Message from the CEO – Prat-Verse</h2>
+                </div>
+
+                <div className="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 border border-yellow-400/30 rounded-2xl p-8">
+                  <div className="space-y-4 text-gray-300 leading-relaxed">
+                    <p className="text-lg">
+                      <span className="font-semibold text-white">Dear Users,</span>
+                    </p>
+                    
+                    <p>
+                      The Prat-Verse CEO <span className="font-semibold text-cyan-400">Pratyush Srivastava</span> wants to inform you that due to heavy traffic, Premium Services have been temporarily paused. The Prat-Verse CEO <span className="font-semibold text-cyan-400">Pratyush Srivastava</span> and team are working hard to restore them as soon as possible.
+                    </p>
+                    
+                    <p>
+                      We sincerely apologize for the inconvenience. The Prat-Verse CEO <span className="font-semibold text-cyan-400">Pratyush Srivastava</span> assures you that services will be back shortly, stronger than before.
+                    </p>
+                    
+                    <div className="pt-4 border-t border-yellow-400/20">
+                      <p className="font-semibold text-yellow-400">
+                        Warm regards,<br />
+                        Prat-Verse CEO
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="mt-6 text-center">
+                  <button
+                    onClick={() => setShowCeoMessage(false)}
+                    className="btn-primary"
+                  >
+                    <CheckCircle2 className="h-5 w-5 mr-2" />
+                    Understood
                   </button>
                 </div>
               </div>

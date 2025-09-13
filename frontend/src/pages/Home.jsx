@@ -101,20 +101,20 @@ const Home = () => {
 
   const testimonials = [
     {
-      name: 'Sarah Johnson',
-      role: 'Computer Science Student',
-      content: 'This platform has revolutionized how I manage my academic life. Everything is so intuitive and efficient!',
+      name: 'Narendra Modi',
+      role: 'Prime Minister of India',
+      content: "This platform has revolutionized how I manage my country's academic life. Everything is so intuitive and efficient!",
       avatar: '👩‍💻'
     },
     {
-      name: 'Dr. Michael Chen',
-      role: 'Professor of Mathematics',
-      content: 'As an educator, I appreciate how this system streamlines course management and student interaction.',
+      name: 'Doland Trump',
+      role: 'President of USA',
+      content: 'As an President of America, I appreciate how this system streamlines course management and student interaction.',
       avatar: '👨‍🏫'
     },
     {
-      name: 'Emily Rodriguez',
-      role: 'Academic Administrator',
+      name: 'Vladimir Putin',
+      role: 'President of Russia',
       content: 'The analytics and reporting features have transformed how we make institutional decisions.',
       avatar: '👩‍💼'
     }
@@ -162,7 +162,7 @@ const Home = () => {
           {/* Subtitle */}
           <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
             Experience the future of academic management with our 
-            <span className="text-cyan-400 font-semibold">AI-powered platform</span> that transforms 
+            <span className="text-cyan-400 font-semibold"> AI-powered platform</span> that transforms 
             how institutions operate and students learn.
           </p>
 
