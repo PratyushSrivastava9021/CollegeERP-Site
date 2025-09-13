@@ -16,14 +16,16 @@ const router = express.Router();
 
 // Public routes
 router.get('/', getCourses);
-router.get('/:id', getCourse);
 
 // Protected routes
 router.use(protect);
 
-// Student routes
-router.get('/enrolled/enrolled', getEnrolledCourses);
+// Student routes (must come before /:id route)
+router.get('/enrolled', getEnrolledCourses);
 router.post('/:id/enroll', enrollStudent);
+
+// Public route for single course (after protected routes to avoid conflicts)
+router.get('/:id', getCourse);
 
 // Teacher and Admin routes
 const courseValidation = [

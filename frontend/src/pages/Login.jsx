@@ -46,33 +46,53 @@ const Login = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-            Sign in to your account
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 animate-fade-in relative overflow-hidden">
+      {/* Animated Grid Background */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-blue-500/5"></div>
+        <div className="absolute inset-0 grid-bg"></div>
+      </div>
+
+      {/* Floating Orbs */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="floating-orb floating-orb-1"></div>
+        <div className="floating-orb floating-orb-2"></div>
+        <div className="floating-orb floating-orb-3"></div>
+      </div>
+
+      <div className="max-w-md w-full space-y-8 relative z-10">
+        <div className="text-center animate-slide-up">
+          <div className="mx-auto h-20 w-20 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl mb-8 animate-pulse-glow hover-glow-cyan">
+            <Lock className="h-10 w-10 text-black" />
+          </div>
+          <h2 className="text-5xl font-black gradient-text mb-4 animate-text-glow">
+            Welcome Back
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
-            Or{' '}
+          <p className="text-xl text-gray-300">
+            Sign in to access your{' '}
+            <span className="text-cyan-400 font-semibold">dashboard</span>
+          </p>
+          <p className="mt-4 text-gray-400">
+            Don't have an account?{' '}
             <Link
               to="/register"
-              className="font-medium text-primary-600 hover:text-primary-500"
+              className="font-semibold text-cyan-400 hover:text-cyan-300 transition-colors duration-300 hover:underline"
             >
-              create a new account
+              Create one here
             </Link>
           </p>
         </div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
-          <div className="space-y-4">
+        <form className="form-container space-y-8 animate-slide-up hover-glow-cyan" onSubmit={handleSubmit(onSubmit)}>
+          <div className="space-y-8">
             {/* Email Field */}
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                Email address
+            <div className="space-y-3">
+              <label htmlFor="email" className="block text-sm font-bold text-white uppercase tracking-wider">
+                Email Address
               </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-gray-400" />
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Mail className="h-5 w-5 text-cyan-400 group-focus-within:text-cyan-300 transition-colors" />
                 </div>
                 <input
                   id="email"
@@ -85,28 +105,28 @@ const Login = () => {
                       message: 'Invalid email address',
                     },
                   })}
-                  className={`appearance-none relative block w-full pl-10 pr-3 py-2 border ${
-                    errors.email ? 'border-red-300' : 'border-gray-300'
-                  } placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm`}
-                  placeholder="Enter your email"
+                  className={`form-input pl-12 h-14 text-base ${
+                    errors.email ? 'border-red-400/50 focus:border-red-400 focus:ring-red-500/20' : 'focus:border-cyan-400 focus:ring-cyan-500/20'
+                  }`}
+                  placeholder="your@email.com"
                 />
               </div>
               {errors.email && (
-                <div className="flex items-center mt-1 text-sm text-red-600">
-                  <AlertCircle className="h-4 w-4 mr-1" />
+                <div className="flex items-center mt-3 text-sm text-red-400 bg-red-500/10 p-3 rounded-xl border border-red-500/20">
+                  <AlertCircle className="h-4 w-4 mr-2 flex-shrink-0" />
                   {errors.email.message}
                 </div>
               )}
             </div>
 
             {/* Password Field */}
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <div className="space-y-3">
+              <label htmlFor="password" className="block text-sm font-bold text-white uppercase tracking-wider">
                 Password
               </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-gray-400" />
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Lock className="h-5 w-5 text-cyan-400 group-focus-within:text-cyan-300 transition-colors" />
                 </div>
                 <input
                   id="password"
@@ -119,52 +139,59 @@ const Login = () => {
                       message: 'Password must be at least 6 characters',
                     },
                   })}
-                  className={`appearance-none relative block w-full pl-10 pr-10 py-2 border ${
-                    errors.password ? 'border-red-300' : 'border-gray-300'
-                  } placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm`}
+                  className={`form-input pl-12 pr-12 h-14 text-base ${
+                    errors.password ? 'border-red-400/50 focus:border-red-400 focus:ring-red-500/20' : 'focus:border-cyan-400 focus:ring-cyan-500/20'
+                  }`}
                   placeholder="Enter your password"
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-cyan-400 hover:text-cyan-300 transition-colors duration-300 transform hover:scale-110"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                    <EyeOff className="h-5 w-5" />
                   ) : (
-                    <Eye className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                    <Eye className="h-5 w-5" />
                   )}
                 </button>
               </div>
               {errors.password && (
-                <div className="flex items-center mt-1 text-sm text-red-600">
-                  <AlertCircle className="h-4 w-4 mr-1" />
+                <div className="flex items-center mt-3 text-sm text-red-400 bg-red-500/10 p-3 rounded-xl border border-red-500/20">
+                  <AlertCircle className="h-4 w-4 mr-2 flex-shrink-0" />
                   {errors.password.message}
                 </div>
               )}
             </div>
           </div>
 
-          <div>
+          <div className="pt-6">
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="btn-primary w-full text-lg font-black h-14 hover-glow-cyan transform hover:scale-[1.02] active:scale-[0.98]"
             >
               {isLoading ? (
-                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                <div className="flex items-center justify-center space-x-3">
+                  <div className="loading-spinner h-6 w-6"></div>
+                  <span>Signing In...</span>
+                </div>
               ) : (
-                'Sign in'
+                <span className="flex items-center justify-center space-x-2">
+                  <span>Sign In</span>
+                  <Lock className="h-5 w-5" />
+                </span>
               )}
             </button>
           </div>
 
-          <div className="text-center">
+          <div className="text-center pt-6 border-t border-gray-800">
             <Link
               to="/"
-              className="font-medium text-primary-600 hover:text-primary-500 text-sm"
+              className="inline-flex items-center space-x-2 font-semibold text-gray-400 hover:text-cyan-400 transition-colors duration-300 group"
             >
-              Back to home
+              <span className="transform group-hover:-translate-x-1 transition-transform">←</span>
+              <span>Back to Home</span>
             </Link>
           </div>
         </form>

@@ -92,14 +92,15 @@ const Dashboard = () => {
   return (
     <div className="space-y-6">
       {/* Welcome Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg p-6 text-white">
-        <div className="flex items-center space-x-4">
-          <div className="h-16 w-16 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
-            <GraduationCap className="h-8 w-8" />
+      <div className="card-black rounded-3xl p-8 text-white animate-slide-up relative overflow-hidden neon-border">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-full blur-2xl"></div>
+        <div className="flex items-center space-x-6 relative z-10">
+          <div className="h-20 w-20 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl animate-pulse-glow">
+            <GraduationCap className="h-10 w-10 text-black" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold">Welcome back, {user?.name}!</h1>
-            <p className="text-blue-100">
+            <h1 className="text-3xl font-bold gradient-text">Welcome back, {user?.name}!</h1>
+            <p className="text-gray-300 mt-2 text-lg">
               Here's what's happening with your academic journey today.
             </p>
           </div>
@@ -111,14 +112,14 @@ const Dashboard = () => {
         {stats.map((stat, index) => {
           const Icon = stat.icon
           return (
-            <div key={index} className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+            <div key={index} className="card-black rounded-2xl p-6 animate-slide-up group hover:shadow-2xl hover:shadow-cyan-500/10" style={{animationDelay: `${index * 0.1}s`}}>
               <div className="flex items-center">
-                <div className={`p-3 rounded-lg ${stat.color} text-white`}>
+                <div className={`p-4 rounded-xl ${stat.color} text-white shadow-lg group-hover:shadow-xl transition-all duration-300 transform group-hover:scale-110`}>
                   <Icon className="h-6 w-6" />
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-600">{stat.name}</p>
-                  <p className="text-2xl font-semibold text-gray-900">{stat.value}</p>
+                  <p className="text-sm font-semibold text-gray-400 uppercase tracking-wide">{stat.name}</p>
+                  <p className="text-2xl font-bold text-white mt-1">{stat.value}</p>
                 </div>
               </div>
             </div>
@@ -126,42 +127,48 @@ const Dashboard = () => {
         })}
       </div>
 
-      {/* Quick Actions - UPDATED WITH CLICK HANDLERS */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div className="p-6 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">Quick Actions</h2>
+      {/* Quick Actions */}
+      <div className="card-black rounded-2xl animate-slide-up">
+        <div className="card-header border-b border-gray-800">
+          <h2 className="text-xl font-bold text-white">Quick Actions</h2>
         </div>
-        <div className="p-6">
+        <div className="card-content">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <button 
               onClick={handleBrowseCourses}
-              className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors group"
+              className="flex items-center justify-between p-6 glass-black rounded-xl hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300 transform hover:scale-105 group neon-border"
             >
               <div className="flex items-center">
-                <BookOpen className="h-5 w-5 text-blue-600 mr-3" />
-                <span className="text-sm font-medium text-gray-900">Browse Courses</span>
+                <div className="p-3 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl text-black shadow-lg group-hover:shadow-cyan-500/25 transition-all duration-300">
+                  <BookOpen className="h-5 w-5" />
+                </div>
+                <span className="text-sm font-semibold text-white ml-4">Browse Courses</span>
               </div>
-              <ChevronRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600" />
+              <ChevronRight className="h-4 w-4 text-gray-400 group-hover:text-cyan-400 transition-colors duration-300" />
             </button>
             <button 
               onClick={handleUpdateProfile}
-              className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors group"
+              className="flex items-center justify-between p-6 glass-black rounded-xl hover:shadow-xl hover:shadow-green-500/10 transition-all duration-300 transform hover:scale-105 group neon-border"
             >
               <div className="flex items-center">
-                <User className="h-5 w-5 text-blue-600 mr-3" />
-                <span className="text-sm font-medium text-gray-900">Update Profile</span>
+                <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl text-white shadow-lg group-hover:shadow-green-500/25 transition-all duration-300">
+                  <User className="h-5 w-5" />
+                </div>
+                <span className="text-sm font-semibold text-white ml-4">Update Profile</span>
               </div>
-              <ChevronRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600" />
+              <ChevronRight className="h-4 w-4 text-gray-400 group-hover:text-green-400 transition-colors duration-300" />
             </button>
             <button 
               onClick={handleViewSchedule}
-              className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors group"
+              className="flex items-center justify-between p-6 glass-black rounded-xl hover:shadow-xl hover:shadow-purple-500/10 transition-all duration-300 transform hover:scale-105 group neon-border"
             >
               <div className="flex items-center">
-                <Calendar className="h-5 w-5 text-blue-600 mr-3" />
-                <span className="text-sm font-medium text-gray-900">View Schedule</span>
+                <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl text-white shadow-lg group-hover:shadow-purple-500/25 transition-all duration-300">
+                  <Calendar className="h-5 w-5" />
+                </div>
+                <span className="text-sm font-semibold text-white ml-4">View Schedule</span>
               </div>
-              <ChevronRight className="h-4 w-4 text-gray-400 group-hover:text-gray-600" />
+              <ChevronRight className="h-4 w-4 text-gray-400 group-hover:text-purple-400 transition-colors duration-300" />
             </button>
           </div>
         </div>
@@ -169,31 +176,33 @@ const Dashboard = () => {
 
       {/* Enrolled Courses (for students) */}
       {user?.role === 'student' && enrolledCourses.length > 0 && (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-          <div className="p-6 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">Your Enrolled Courses</h2>
+        <div className="card-black rounded-2xl animate-slide-up">
+          <div className="card-header border-b border-gray-800">
+            <h2 className="text-xl font-bold text-white">Your Enrolled Courses</h2>
           </div>
-          <div className="p-6">
+          <div className="card-content">
             <div className="space-y-4">
-              {enrolledCourses.map((course) => (
-                <div key={course._id} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer">
-                  <div className="flex items-center space-x-4">
-                    <div className="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <BookOpen className="h-6 w-6 text-blue-600" />
+              {enrolledCourses.map((course, index) => (
+                <div key={course._id} className="glass-black rounded-xl p-6 hover:shadow-xl hover:shadow-cyan-500/10 transition-all duration-300 transform hover:scale-[1.02] cursor-pointer animate-slide-up neon-border" style={{animationDelay: `${index * 0.1}s`}}>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <div className="h-14 w-14 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/25">
+                        <BookOpen className="h-7 w-7 text-black" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-white text-lg">{course.title}</h3>
+                        <p className="text-sm text-cyan-400 font-medium">{course.code} • {course.credits} credits</p>
+                        <p className="text-sm text-gray-400">
+                          {course.semester} {course.year} • {course.department}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-medium text-gray-900">{course.title}</h3>
-                      <p className="text-sm text-gray-500">{course.code} • {course.credits} credits</p>
-                      <p className="text-sm text-gray-500">
-                        {course.semester} {course.year} • {course.department}
+                    <div className="text-right">
+                      <p className="text-sm font-bold text-white">
+                        {course.instructor?.name}
                       </p>
+                      <p className="text-sm text-gray-400">Instructor</p>
                     </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-sm font-medium text-gray-900">
-                      {course.instructor?.name}
-                    </p>
-                    <p className="text-sm text-gray-500">Instructor</p>
                   </div>
                 </div>
               ))}
@@ -203,29 +212,29 @@ const Dashboard = () => {
       )}
 
       {/* Recent Activity */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div className="p-6 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">Recent Activity</h2>
+      <div className="card-black rounded-2xl animate-slide-up">
+        <div className="card-header border-b border-gray-800">
+          <h2 className="text-xl font-bold text-white">Recent Activity</h2>
         </div>
-        <div className="p-6">
+        <div className="card-content">
           <div className="space-y-4">
-            <div className="flex items-center space-x-3">
-              <div className="h-8 w-8 bg-green-100 rounded-full flex items-center justify-center">
-                <TrendingUp className="h-4 w-4 text-green-600" />
+            <div className="flex items-center space-x-4 p-4 glass-black rounded-xl neon-border">
+              <div className="h-10 w-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/25">
+                <TrendingUp className="h-5 w-5 text-white" />
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-900">Successfully logged in</p>
-                <p className="text-xs text-gray-500">{formatDate(new Date())}</p>
+                <p className="text-sm font-bold text-white">Successfully logged in</p>
+                <p className="text-xs text-gray-400 font-medium">{formatDate(new Date())}</p>
               </div>
             </div>
             {user?.lastLogin && (
-              <div className="flex items-center space-x-3">
-                <div className="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center">
-                  <Clock className="h-4 w-4 text-blue-600" />
+              <div className="flex items-center space-x-4 p-4 glass-black rounded-xl neon-border">
+                <div className="h-10 w-10 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/25">
+                  <Clock className="h-5 w-5 text-black" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-900">Last login</p>
-                  <p className="text-xs text-gray-500">{formatDate(user.lastLogin)}</p>
+                  <p className="text-sm font-bold text-white">Last login</p>
+                  <p className="text-xs text-gray-400 font-medium">{formatDate(user.lastLogin)}</p>
                 </div>
               </div>
             )}
