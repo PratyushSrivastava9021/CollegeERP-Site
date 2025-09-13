@@ -33,6 +33,13 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         
+        {/* FIXED: Moved protected routes outside of nested ProtectedRoute */}
+        <Route path="dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+        <Route path="courses" element={<ProtectedRoute><Courses /></ProtectedRoute>} />
+        <Route path="courses/:id" element={<ProtectedRoute><CourseDetail /></ProtectedRoute>} />
+        <Route path="users" element={<ProtectedRoute><Users /></ProtectedRoute>} />
+        
         {/* Role-specific landing pages */}
         <Route path="admin" element={<ProtectedRoute requiredRole="admin"><Admin /></ProtectedRoute>} />
         <Route path="faculty" element={<ProtectedRoute requiredRole="faculty"><Faculty /></ProtectedRoute>} />
@@ -53,15 +60,6 @@ function App() {
         {/* Grades related */}
         <Route path="faculty/grades" element={<ProtectedRoute requiredRole="faculty"><FacultyGrades /></ProtectedRoute>} />
         <Route path="student/grades" element={<ProtectedRoute requiredRole="student"><StudentGrades /></ProtectedRoute>} />
-        
-        {/* Protected routes */}
-        <Route element={<ProtectedRoute />}>
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="courses" element={<Courses />} />
-          <Route path="courses/:id" element={<CourseDetail />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="users" element={<Users />} />
-        </Route>
       </Route>
     </Routes>
   )
