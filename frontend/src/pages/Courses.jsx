@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import { 
   BookOpen, 
   Users, 
@@ -33,25 +33,26 @@ import {
   Lightbulb,
   Heart,
   MessageCircle
-} from 'lucide-react';
+} from 'lucide-react'
+import toast from 'react-hot-toast'
+import ModalPortal from '../components/ModalPortal'
 
 const Courses = () => {
-  const [selectedSemester, setSelectedSemester] = useState('all');
-  const [selectedDepartment, setSelectedDepartment] = useState('all');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [bookmarkedCourses, setBookmarkedCourses] = useState(new Set());
-  const [viewMode, setViewMode] = useState('grid');
-  const [showFilters, setShowFilters] = useState(false);
-  const [enrollmentModal, setEnrollmentModal] = useState(null);
-  const [notification, setNotification] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [hoveredCard, setHoveredCard] = useState(null);
+  const [selectedSemester, setSelectedSemester] = useState('all')
+  const [selectedDepartment, setSelectedDepartment] = useState('all')
+  const [searchTerm, setSearchTerm] = useState('')
+  const [bookmarkedCourses, setBookmarkedCourses] = useState(new Set())
+  const [viewMode, setViewMode] = useState('grid')
+  const [showFilters, setShowFilters] = useState(false)
+  const [enrollmentModal, setEnrollmentModal] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [hoveredCard, setHoveredCard] = useState(null)
 
   useEffect(() => {
-    setIsLoading(true);
-    const timer = setTimeout(() => setIsLoading(false), 1000);
-    return () => clearTimeout(timer);
-  }, []);
+    setIsLoading(true)
+    const timer = setTimeout(() => setIsLoading(false), 1000)
+    return () => clearTimeout(timer)
+  }, [])
 
   const engineeringCourses = [
     {
@@ -204,44 +205,39 @@ const Courses = () => {
       trending: true,
       color: 'orange'
     }
-  ];
-
-  const showNotification = (message, type = 'success') => {
-    setNotification({ message, type });
-    setTimeout(() => setNotification(null), 3000);
-  };
+  ]
 
   const toggleBookmark = (courseId) => {
-    const newBookmarks = new Set(bookmarkedCourses);
+    const newBookmarks = new Set(bookmarkedCourses)
     if (newBookmarks.has(courseId)) {
-      newBookmarks.delete(courseId);
-      showNotification('Course removed from bookmarks', 'info');
+      newBookmarks.delete(courseId)
+      toast.success('Course removed from bookmarks')
     } else {
-      newBookmarks.add(courseId);
-      showNotification('Course bookmarked successfully!', 'success');
+      newBookmarks.add(courseId)
+      toast.success('Course bookmarked successfully!')
     }
-    setBookmarkedCourses(newBookmarks);
-  };
+    setBookmarkedCourses(newBookmarks)
+  }
 
   const handleEnroll = (course) => {
-    setEnrollmentModal(course);
-  };
+    setEnrollmentModal(course)
+  }
 
   const confirmEnrollment = () => {
-    showNotification(`Successfully enrolled in ${enrollmentModal.title}!`, 'success');
-    setEnrollmentModal(null);
-  };
+    toast.success(`Successfully enrolled in ${enrollmentModal.title}!`)
+    setEnrollmentModal(null)
+  }
 
   const filteredCourses = engineeringCourses.filter(course => {
     const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          course.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          course.instructor.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         course.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    const matchesSemester = selectedSemester === 'all' || course.semester.toString() === selectedSemester;
-    const matchesDepartment = selectedDepartment === 'all' || course.department === selectedDepartment;
+                         course.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+    const matchesSemester = selectedSemester === 'all' || course.semester.toString() === selectedSemester
+    const matchesDepartment = selectedDepartment === 'all' || course.department === selectedDepartment
     
-    return matchesSearch && matchesSemester && matchesDepartment;
-  });
+    return matchesSearch && matchesSemester && matchesDepartment
+  })
 
   if (isLoading) {
     return (
@@ -251,7 +247,7 @@ const Courses = () => {
           <p className="text-gray-300 text-lg">Loading your courses...</p>
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -270,66 +266,6 @@ const Courses = () => {
         <div className="floating-orb floating-orb-4"></div>
         <div className="floating-orb floating-orb-5"></div>
       </div>
-
-      {/* Notification Toast */}
-      {notification && (
-        <div className={`notification-toast top-24 right-4 px-6 py-4 rounded-xl shadow-lg border-l-4 animate-slide-up ${
-          notification.type === 'success' ? 'bg-green-500/10 border-green-500 text-green-400' :
-          notification.type === 'error' ? 'bg-red-500/10 border-red-500 text-red-400' :
-          'bg-blue-500/10 border-blue-500 text-blue-400'
-        } neon-border`}>
-          <div className="flex items-center">
-            {notification.type === 'success' && <CheckCircle2 className="w-5 h-5 mr-2" />}
-            {notification.type === 'error' && <AlertCircle className="w-5 h-5 mr-2" />}
-            <p className="font-medium">{notification.message}</p>
-          </div>
-        </div>
-      )}
-
-      {/* Enrollment Modal */}
-      {enrollmentModal && (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-          <div className="card-premium max-w-md w-full animate-slide-up hover-glow-cyan p-8">
-            <div className="text-center mb-6">
-              <div className="bg-gradient-to-r from-cyan-400 to-blue-500 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse-glow">
-                <GraduationCap className="w-8 h-8 text-black" />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-2">Enroll in Course</h3>
-              <p className="text-gray-300">{enrollmentModal.title}</p>
-            </div>
-            
-            <div className="space-y-4 mb-6">
-              <div className="flex justify-between">
-                <span className="text-gray-400">Credits:</span>
-                <span className="font-semibold text-white">{enrollmentModal.credits}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-400">Duration:</span>
-                <span className="font-semibold text-white">{enrollmentModal.duration}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-gray-400">Available Spots:</span>
-                <span className="font-semibold text-white">{enrollmentModal.capacity - enrollmentModal.enrolled}</span>
-              </div>
-            </div>
-
-            <div className="flex gap-3">
-              <button
-                onClick={() => setEnrollmentModal(null)}
-                className="flex-1 btn-outline"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={confirmEnrollment}
-                className="flex-1 btn-primary"
-              >
-                Confirm Enrollment
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       <div className="max-w-7xl mx-auto p-6 relative z-10">
         {/* Enhanced Header */}
@@ -643,9 +579,9 @@ const Courses = () => {
             <p className="text-gray-400 mb-6">Try adjusting your search criteria or explore different departments</p>
             <button 
               onClick={() => {
-                setSearchTerm('');
-                setSelectedSemester('all');
-                setSelectedDepartment('all');
+                setSearchTerm('')
+                setSelectedSemester('all')
+                setSelectedDepartment('all')
               }}
               className="btn-primary"
             >
@@ -654,8 +590,56 @@ const Courses = () => {
           </div>
         )}
       </div>
-    </div>
-  );
-};
 
-export default Courses;
+      {/* Modal Portal - Renders outside layout */}
+      <ModalPortal isOpen={!!enrollmentModal}>
+        <div 
+          className="fixed inset-0 bg-black/75 backdrop-blur-md flex items-center justify-center p-4"
+          style={{ zIndex: 999999 }}
+        >
+          <div className="card-premium max-w-md w-full animate-slide-up hover-glow-cyan p-8">
+            <div className="text-center mb-6">
+              <div className="bg-gradient-to-r from-cyan-400 to-blue-500 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 animate-pulse-glow">
+                <GraduationCap className="w-8 h-8 text-black" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">Enroll in Course</h3>
+              <p className="text-gray-300">{enrollmentModal?.title}</p>
+            </div>
+            
+            <div className="space-y-4 mb-6">
+              <div className="flex justify-between">
+                <span className="text-gray-400">Credits:</span>
+                <span className="font-semibold text-white">{enrollmentModal?.credits}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-400">Duration:</span>
+                <span className="font-semibold text-white">{enrollmentModal?.duration}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-400">Available Spots:</span>
+                <span className="font-semibold text-white">{enrollmentModal ? enrollmentModal.capacity - enrollmentModal.enrolled : 0}</span>
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => setEnrollmentModal(null)}
+                className="flex-1 btn-outline"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={confirmEnrollment}
+                className="flex-1 btn-primary"
+              >
+                Confirm Enrollment
+              </button>
+            </div>
+          </div>
+        </div>
+      </ModalPortal>
+    </div>
+  )
+}
+
+export default Courses

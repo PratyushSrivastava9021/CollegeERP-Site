@@ -263,11 +263,11 @@ const Profile = () => {
           </div>
 
           <div className="relative z-10 px-8 py-12">
-            <div className="flex items-end justify-between">
-              <div className="flex items-end space-x-6">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+              <div className="flex flex-col sm:flex-row items-center sm:items-end space-y-4 sm:space-y-0 sm:space-x-6">
                 {/* Enhanced Avatar */}
                 <div className="relative group">
-                  <div className="h-36 w-36 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-3xl border-4 border-cyan-400/30 shadow-2xl shadow-cyan-500/25 flex items-center justify-center text-4xl font-bold text-black group-hover:scale-105 transition-all duration-500 group-hover:rotate-3 animate-pulse-glow">
+                  <div className="h-24 w-24 sm:h-36 sm:w-36 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl sm:rounded-3xl border-2 sm:border-4 border-cyan-400/30 shadow-2xl shadow-cyan-500/25 flex items-center justify-center text-2xl sm:text-4xl font-bold text-black group-hover:scale-105 transition-all duration-500 group-hover:rotate-3 animate-pulse-glow">
                     {user?.name ? user.name.split(' ').map(n => n[0]).join('') : 'U'}
                   </div>
                   
@@ -287,16 +287,16 @@ const Profile = () => {
                 </div>
 
                 {/* Profile Info */}
-                <div className="pb-4 text-white">
-                  <div className="flex items-center gap-4 mb-3">
-                    <h1 className="text-5xl font-bold gradient-text animate-text-glow">
+                <div className="pb-4 text-white text-center sm:text-left">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-3">
+                    <h1 className="text-2xl sm:text-5xl font-bold gradient-text animate-text-glow">
                       {user?.name}
                     </h1>
-                    <div className="flex items-center gap-2">
-                      <span className="bg-cyan-500/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold border border-cyan-400/30 text-cyan-400">
+                    <div className="flex items-center justify-center sm:justify-start gap-2">
+                      <span className="bg-cyan-500/20 backdrop-blur-sm px-2 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-semibold border border-cyan-400/30 text-cyan-400">
                         Verified ✓
                       </span>
-                      <span className="bg-gradient-to-r from-yellow-400 to-orange-500 px-4 py-2 rounded-full text-sm font-bold text-black shadow-lg">
+                      <span className="bg-gradient-to-r from-yellow-400 to-orange-500 px-2 sm:px-4 py-1 sm:py-2 rounded-full text-xs sm:text-sm font-bold text-black shadow-lg">
                         Premium
                       </span>
                     </div>
@@ -316,14 +316,14 @@ const Profile = () => {
                   </div>
                   
                   {/* Enhanced Quick Stats */}
-                  <div className="flex items-center gap-4 flex-wrap">
-                    <div className="flex items-center bg-cyan-500/15 backdrop-blur-md px-4 py-3 rounded-2xl border border-cyan-400/30 hover:bg-cyan-500/20 transition-all group neon-border">
-                      <Trophy className="h-5 w-5 mr-3 text-yellow-400 group-hover:rotate-12 transition-transform" />
+                  <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 sm:gap-4">
+                    <div className="flex items-center bg-cyan-500/15 backdrop-blur-md px-2 sm:px-4 py-2 sm:py-3 rounded-xl sm:rounded-2xl border border-cyan-400/30 hover:bg-cyan-500/20 transition-all group neon-border">
+                      <Trophy className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 text-yellow-400 group-hover:rotate-12 transition-transform" />
                       <div>
                         {user?.role === 'student' ? (
                           <>
-                            <span className="text-sm font-bold">Rank #3</span>
-                            <p className="text-xs text-gray-300">of 150</p>
+                            <span className="text-xs sm:text-sm font-bold">Rank #3</span>
+                            <p className="text-xs text-gray-300 hidden sm:block">of 150</p>
                           </>
                         ) : (
                           <>
@@ -465,17 +465,17 @@ const Profile = () => {
 
         {/* Tab Content */}
         {activeTab === 'overview' && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-slide-up">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8 animate-slide-up">
             {/* Personal Information */}
             <div className="lg:col-span-2 card-premium neon-border">
-              <div className="px-8 py-6 border-b border-gray-800 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-t-3xl">
-                <h2 className="text-2xl font-bold text-white flex items-center">
-                  <User className="h-6 w-6 mr-3 text-cyan-400" />
+              <div className="px-4 sm:px-8 py-4 sm:py-6 border-b border-gray-800 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-t-3xl">
+                <h2 className="text-xl sm:text-2xl font-bold text-white flex items-center">
+                  <User className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3 text-cyan-400" />
                   Personal Information
                 </h2>
               </div>
-              <div className="p-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="p-4 sm:p-8">
+                <div className="grid grid-cols-1 gap-6 sm:gap-8">
                   <div className="group">
                     <label className="block text-sm font-bold text-gray-300 mb-4">
                       <User className="h-5 w-5 inline mr-2 text-cyan-400" />
