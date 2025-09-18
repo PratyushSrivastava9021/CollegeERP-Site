@@ -29,8 +29,10 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     setIsLoading(true)
+    
     try {
       const result = await login(data.email, data.password)
+      
       if (result.success) {
         toast.success('Login successful!')
         const path = getRedirectPath(result.role || result.user?.role)
@@ -40,6 +42,7 @@ const Login = () => {
       }
     } catch (error) {
       toast.error('An error occurred during login')
+      console.error('Login error details:', error);
     } finally {
       setIsLoading(false)
     }

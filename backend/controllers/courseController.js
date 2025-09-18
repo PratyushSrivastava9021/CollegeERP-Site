@@ -32,14 +32,12 @@ exports.getCourses = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      data: {
-        courses,
-        pagination: {
-          currentPage: parseInt(page),
-          totalPages: Math.ceil(total / limit),
-          totalCourses: total,
-          coursesPerPage: parseInt(limit)
-        }
+      data: courses,
+      pagination: {
+        currentPage: parseInt(page),
+        totalPages: Math.ceil(total / limit),
+        totalCourses: total,
+        coursesPerPage: parseInt(limit)
       }
     });
   } catch (error) {
@@ -85,7 +83,7 @@ exports.getCourse = async (req, res) => {
 // @access  Private/Admin/Teacher
 exports.createCourse = async (req, res) => {
   try {
-    const { code, title, description, credits, department, semester, year, maxStudents, schedule } = req.body;
+    const { code, title, description, credits, department, semester, year, maxStudents, schedule, syllabus, prerequisites } = req.body;
 
     // Check if course code already exists
     const existingCourse = await Course.findOne({ code });
@@ -96,7 +94,7 @@ exports.createCourse = async (req, res) => {
       });
     }
 
-    // Set instructor as current user (if teacher) or from request body (if admin)
+    // Set instructor as current user (if faculty) or from request body (if admin)
     const instructorId = req.user.role === 'admin' ? req.body.instructor : req.user.id;
 
     const course = await Course.create({
@@ -109,7 +107,10 @@ exports.createCourse = async (req, res) => {
       semester,
       year,
       maxStudents,
-      schedule
+      schedule,
+      syllabus,
+      prerequisites,
+      createdBy: req.user.id
     });
 
     const populatedCourse = await Course.findById(course._id)
@@ -134,7 +135,7 @@ exports.createCourse = async (req, res) => {
 // @access  Private/Admin/Teacher
 exports.updateCourse = async (req, res) => {
   try {
-    const { code, title, description, credits, department, semester, year, maxStudents, schedule } = req.body;
+    const { code, title, description, credits, department, semester, year, maxStudents, schedule, syllabus, prerequisites } = req.body;
 
     // Check if course code is being updated and if it already exists
     if (code) {
@@ -152,7 +153,7 @@ exports.updateCourse = async (req, res) => {
 
     const course = await Course.findByIdAndUpdate(
       req.params.id,
-      { code, title, description, credits, department, semester, year, maxStudents, schedule },
+      { code, title, description, credits, department, semester, year, maxStudents, schedule, syllabus, prerequisites },
       { new: true, runValidators: true }
     ).populate('instructor', 'name email department');
 

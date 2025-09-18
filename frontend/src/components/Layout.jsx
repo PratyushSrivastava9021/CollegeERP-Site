@@ -1,5 +1,6 @@
 import { Outlet, Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { useRubberBandScroll } from '../hooks/useRubberBandScroll'
 import { 
   Home, 
   BookOpen, 
@@ -8,11 +9,9 @@ import {
   LogOut,
   Menu,
   X,
-  Sparkles,
   Search,
-  Calendar,
-  Award,
-  Bell
+  Send,
+  Library
 } from 'lucide-react'
 import { useState } from 'react'
 import NotificationCenter from './NotificationCenter'
@@ -21,6 +20,8 @@ const Layout = () => {
   const { user, logout } = useAuth()
   const location = useLocation()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  
+  useRubberBandScroll()
 
   const getNavigation = () => {
     if (!user) {
@@ -35,9 +36,10 @@ const Layout = () => {
     if (user.role === 'student') {
       return [
         ...baseNav,
-        { name: 'Attendance', href: '/student/attendance', icon: Calendar },
-        { name: 'Grades', href: '/student/grades', icon: Award },
-        { name: 'Notices', href: '/notices', icon: Bell },
+        { name: 'Enroll', href: '/student/enroll', icon: BookOpen },
+        { name: 'Academic', href: '/student/academic', icon: GraduationCap },
+        { name: 'Messages', href: '/messages', icon: Send },
+        { name: 'Library', href: '/library', icon: Library },
         { name: 'Profile', href: '/profile', icon: User },
       ]
     }
@@ -45,59 +47,129 @@ const Layout = () => {
     if (user.role === 'faculty') {
       return [
         ...baseNav,
-        { name: 'Mark Attendance', href: '/faculty/attendance', icon: Calendar },
-        { name: 'Manage Grades', href: '/faculty/grades', icon: Award },
-        { name: 'Notices', href: '/notices', icon: Bell },
+        { name: 'Teaching', href: '/faculty/teaching', icon: GraduationCap },
+        { name: 'Enrollments', href: '/faculty/enrollments', icon: BookOpen },
+        { name: 'Messages', href: '/messages', icon: Send },
+        { name: 'Library', href: '/library', icon: Library },
         { name: 'Profile', href: '/profile', icon: User },
       ]
     }
 
-    return [
-      ...baseNav,
-      { name: 'Notices', href: '/notices', icon: Bell },
-      { name: 'Profile', href: '/profile', icon: User },
-    ]
+    if (user.role === 'admin') {
+      return [
+        ...baseNav,
+        { name: 'Users', href: '/users', icon: User },
+        { name: 'Analytics', href: '/analytics', icon: GraduationCap },
+        { name: 'Profile', href: '/profile', icon: User },
+      ]
+    }
+
+    return [...baseNav, { name: 'Profile', href: '/profile', icon: User }]
   }
 
   const navigation = getNavigation()
 
-  const handleLogout = () => {
-    logout()
-  }
-
   return (
-    <div className="min-h-screen animate-fade-in">
-      {/* Floating Background Elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-float" style={{animationDelay: '2s'}}></div>
-      </div>
+    <div className="min-h-screen bg-black">
+      {/* Fixed Top Navigation */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-lg border-b border-gray-700">
+        <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
+          {/* Left: Logo + Menu */}
+          <div className="flex items-center space-x-4">
+            {user && (
+              <button
+                onClick={() => setSidebarOpen(true)}
+                className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 transition-colors lg:hidden"
+              >
+                <Menu className="h-6 w-6" />
+              </button>
+            )}
+            
+            <Link to="/" className="flex items-center space-x-3">
+              <div className="h-8 w-8 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-lg flex items-center justify-center">
+                <GraduationCap className="h-5 w-5 text-black" />
+              </div>
+              <span className="text-xl font-bold text-white hidden sm:block">College ERP</span>
+            </Link>
+          </div>
 
-      {/* Top Navigation */}
-      <nav className="glass-black fixed top-0 left-0 right-0 z-50 animate-slide-up neon-border">
-        <div className="px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              {user && (
-                <button
-                  onClick={() => setSidebarOpen(!sidebarOpen)}
-                  className="p-2 rounded-xl text-white/70 hover:text-white hover:bg-white/10 lg:hidden transition-all duration-300 transform hover:scale-110"
-                >
-                  <Menu className="h-6 w-6" />
+          {/* Right: User Actions */}
+          <div className="flex items-center space-x-3">
+            {user ? (
+              <>
+                <button className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition-colors hidden sm:block">
+                  <Search className="h-5 w-5 text-gray-400" />
                 </button>
-              )}
-              
-              <Link to="/" className="flex items-center space-x-3 ml-4 lg:ml-0 group">
-                <div className="h-10 w-10 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-cyan-500/50 transition-all duration-300 transform group-hover:scale-110 animate-pulse-glow">
-                  <GraduationCap className="h-6 w-6 text-black" />
-                </div>
-                <span className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors duration-300">College ERP</span>
-                <Sparkles className="h-4 w-4 text-cyan-400 animate-pulse" />
-              </Link>
-            </div>
+                
+                <NotificationCenter />
+                
+                <span className="text-sm text-gray-300 hidden md:block max-w-32 truncate">
+                  {user.name}
+                </span>
+                
+                <button
+                  onClick={logout}
+                  className="flex items-center px-3 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-gray-700 rounded-lg transition-colors"
+                >
+                  <LogOut className="h-4 w-4" />
+                  <span className="ml-2 hidden sm:block">Logout</span>
+                </button>
+              </>
+            ) : (
+              <div className="flex items-center space-x-3">
+                <Link to="/login" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
+                  Login
+                </Link>
+                <Link to="/register" className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                  Register
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      </header>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex lg:items-center lg:space-x-2">
+      {/* Desktop Sidebar */}
+      {user && (
+        <aside className="fixed top-16 left-0 bottom-0 w-64 bg-gray-900 border-r border-gray-700 hidden lg:block z-40">
+          <nav className="p-4 space-y-2">
+            {navigation.map((item) => {
+              const Icon = item.icon
+              const isActive = location.pathname === item.href
+              return (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`flex items-center px-3 py-3 rounded-lg text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'bg-blue-600 text-white'
+                      : 'text-gray-300 hover:text-white hover:bg-gray-700'
+                  }`}
+                >
+                  <Icon className="h-5 w-5 mr-3" />
+                  {item.name}
+                </Link>
+              )
+            })}
+          </nav>
+        </aside>
+      )}
+
+      {/* Mobile Sidebar */}
+      {user && sidebarOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          <div className="fixed inset-0 bg-black/50" onClick={() => setSidebarOpen(false)} />
+          <aside className="fixed top-0 left-0 bottom-0 w-64 bg-gray-900 border-r border-gray-700">
+            <div className="flex items-center justify-between p-4 border-b border-gray-700">
+              <span className="text-lg font-semibold text-white">Navigation</span>
+              <button
+                onClick={() => setSidebarOpen(false)}
+                className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 transition-colors"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <nav className="p-4 space-y-2">
               {navigation.map((item) => {
                 const Icon = item.icon
                 const isActive = location.pathname === item.href
@@ -105,109 +177,27 @@ const Layout = () => {
                   <Link
                     key={item.name}
                     to={item.href}
-                    className={`flex items-center px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 transform hover:scale-105 ${
+                    onClick={() => setSidebarOpen(false)}
+                    className={`flex items-center px-3 py-3 rounded-lg text-sm font-medium transition-colors ${
                       isActive
-                        ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-black shadow-lg shadow-cyan-500/25'
-                        : 'text-white/80 hover:text-white hover:bg-white/5'
+                        ? 'bg-blue-600 text-white'
+                        : 'text-gray-300 hover:text-white hover:bg-gray-700'
                     }`}
                   >
-                    <Icon className="h-4 w-4 mr-2" />
+                    <Icon className="h-5 w-5 mr-3" />
                     {item.name}
                   </Link>
                 )
               })}
-            </div>
-
-            {/* User Menu */}
-            <div className="flex items-center space-x-4">
-              {user ? (
-                <>
-                  <button className="p-3 rounded-xl bg-gray-800/50 border border-gray-700/50 hover:bg-gray-700/50 transition-all hover:scale-105 group">
-                    <Search className="w-6 h-6 text-gray-300 group-hover:text-cyan-400 transition-colors" />
-                  </button>
-                  
-                  <NotificationCenter />
-                  
-                  <span className="text-sm text-white/80 hidden sm:block font-medium">
-                    Welcome, {user.name}
-                  </span>
-                  <button
-                    onClick={handleLogout}
-                    className="btn-glass flex items-center text-sm font-semibold"
-                  >
-                    <LogOut className="h-4 w-4 mr-2" />
-                    Logout
-                  </button>
-                </>
-              ) : (
-                <div className="flex items-center space-x-3">
-                  <Link
-                    to="/login"
-                    className="text-sm font-semibold text-white/80 hover:text-white transition-colors duration-300"
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    to="/register"
-                    className="btn-primary"
-                  >
-                    Register
-                  </Link>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Mobile Sidebar */}
-      {user && (
-        <div className={`lg:hidden ${sidebarOpen ? 'block' : 'hidden'}`}>
-          <div className="fixed inset-0 z-40 flex animate-fade-in">
-            <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setSidebarOpen(false)} />
-            <div className="relative flex flex-col flex-1 w-72 glass-black animate-slide-in-right neon-border">
-              <div className="absolute top-0 right-0 -mr-12 pt-2">
-                <button
-                  onClick={() => setSidebarOpen(false)}
-                  className="ml-1 flex items-center justify-center h-10 w-10 rounded-full glass text-white hover:bg-white/20 transition-all duration-300 transform hover:scale-110"
-                >
-                  <X className="h-6 w-6" />
-                </button>
-              </div>
-              <div className="flex-1 h-0 pt-8 pb-4 overflow-y-auto">
-                <nav className="mt-5 px-4 space-y-2">
-                  {navigation.map((item) => {
-                    const Icon = item.icon
-                    const isActive = location.pathname === item.href
-                    return (
-                      <Link
-                        key={item.name}
-                        to={item.href}
-                        onClick={() => setSidebarOpen(false)}
-                        className={`group flex items-center px-4 py-3 text-base font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 ${
-                          isActive
-                            ? 'bg-gradient-to-r from-cyan-500 to-blue-500 text-black shadow-lg shadow-cyan-500/25'
-                            : 'text-white/80 hover:text-white hover:bg-white/5'
-                        }`}
-                      >
-                        <Icon className="mr-4 h-6 w-6" />
-                        {item.name}
-                      </Link>
-                    )
-                  })}
-                </nav>
-              </div>
-            </div>
-          </div>
+            </nav>
+          </aside>
         </div>
       )}
 
       {/* Main Content */}
-      <main className="pt-20 pb-8 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="animate-slide-up">
-            <Outlet />
-          </div>
+      <main className={`pt-16 min-h-screen ${user ? 'lg:pl-64' : ''}`}>
+        <div className="p-4 sm:p-6 lg:p-8">
+          <Outlet />
         </div>
       </main>
     </div>

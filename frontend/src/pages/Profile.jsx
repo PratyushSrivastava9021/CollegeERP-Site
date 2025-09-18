@@ -252,9 +252,9 @@ const Profile = () => {
         </div>
       )}
 
-      <div className="max-w-7xl mx-auto p-6 relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10" style={{padding: 'clamp(1rem, 4vw, 2rem)'}}>
         {/* Enhanced Profile Header */}
-        <div className="relative mb-8 card-premium neon-border overflow-hidden animate-slide-up">
+        <div className="relative card-premium neon-border overflow-hidden animate-slide-up" style={{marginBottom: 'clamp(2rem, 6vh, 3rem)'}}>
           {/* Animated Background */}
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-blue-500/5 to-purple-500/10">
             <div className="absolute inset-0 bg-black/40"></div>
@@ -262,12 +262,12 @@ const Profile = () => {
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/5 rounded-full translate-y-32 -translate-x-32 animate-pulse delay-1000"></div>
           </div>
 
-          <div className="relative z-10 px-8 py-12">
-            <div className="flex items-end justify-between">
-              <div className="flex items-end space-x-6">
+          <div className="relative z-10" style={{padding: 'clamp(1rem, 4vw, 3rem)'}}>
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 lg:gap-6">
+              <div className="flex flex-col md:flex-row items-center md:items-end gap-4 md:gap-6">
                 {/* Enhanced Avatar */}
                 <div className="relative group">
-                  <div className="h-36 w-36 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-3xl border-4 border-cyan-400/30 shadow-2xl shadow-cyan-500/25 flex items-center justify-center text-4xl font-bold text-black group-hover:scale-105 transition-all duration-500 group-hover:rotate-3 animate-pulse-glow">
+                  <div className="h-20 w-20 md:h-32 md:w-32 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl md:rounded-3xl border-2 md:border-4 border-cyan-400/30 shadow-2xl shadow-cyan-500/25 flex items-center justify-center text-lg md:text-3xl font-bold text-black group-hover:scale-105 transition-all duration-500 group-hover:rotate-3 animate-pulse-glow">
                     {user?.name ? user.name.split(' ').map(n => n[0]).join('') : 'U'}
                   </div>
                   
@@ -287,95 +287,95 @@ const Profile = () => {
                 </div>
 
                 {/* Profile Info */}
-                <div className="pb-4 text-white">
-                  <div className="flex items-center gap-4 mb-3">
-                    <h1 className="text-5xl font-bold gradient-text animate-text-glow">
+                <div className="pb-4 text-white text-center md:text-left">
+                  <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-3">
+                    <h1 className="text-xl md:text-3xl lg:text-4xl font-bold gradient-text animate-text-glow">
                       {user?.name}
                     </h1>
-                    <div className="flex items-center gap-2">
-                      <span className="bg-cyan-500/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold border border-cyan-400/30 text-cyan-400">
+                    <div className="flex items-center justify-center md:justify-start gap-2">
+                      <span className="bg-cyan-500/20 backdrop-blur-sm px-2 md:px-4 py-1 md:py-2 rounded-full text-xs md:text-sm font-semibold border border-cyan-400/30 text-cyan-400">
                         Verified ✓
                       </span>
-                      <span className="bg-gradient-to-r from-yellow-400 to-orange-500 px-4 py-2 rounded-full text-sm font-bold text-black shadow-lg">
+                      <span className="bg-gradient-to-r from-yellow-400 to-orange-500 px-2 md:px-4 py-1 md:py-2 rounded-full text-xs md:text-sm font-bold text-black shadow-lg">
                         Premium
                       </span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4 mb-4">
-                    <p className="text-white/95 text-xl font-medium">
+                  <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-4">
+                    <p className="text-white/95 text-base md:text-lg font-medium">
                       {user?.role} • {user?.department}
                     </p>
-                    <div className="h-1 w-1 bg-cyan-400 rounded-full"></div>
+                    <div className="hidden md:block h-1 w-1 bg-cyan-400 rounded-full"></div>
                     {user?.role === 'student' ? (
-                      <p className="text-cyan-400 text-lg">Semester 6</p>
+                      <p className="text-cyan-400 text-sm md:text-base">Semester 6</p>
                     ) : (
-                      <p className="text-cyan-400 text-lg">Senior Faculty</p>
+                      <p className="text-cyan-400 text-sm md:text-base">Senior Faculty</p>
                     )}
-                    <div className="h-1 w-1 bg-cyan-400 rounded-full"></div>
-                    <p className="text-gray-300">ID: {user?.role === 'student' ? 'CS2025001' : 'FAC001'}</p>
+                    <div className="hidden md:block h-1 w-1 bg-cyan-400 rounded-full"></div>
+                    <p className="text-gray-300 text-sm md:text-base">ID: {user?.role === 'student' ? 'CS2025001' : 'FAC001'}</p>
                   </div>
                   
                   {/* Enhanced Quick Stats */}
-                  <div className="flex items-center gap-4 flex-wrap">
-                    <div className="flex items-center bg-cyan-500/15 backdrop-blur-md px-4 py-3 rounded-2xl border border-cyan-400/30 hover:bg-cyan-500/20 transition-all group neon-border">
-                      <Trophy className="h-5 w-5 mr-3 text-yellow-400 group-hover:rotate-12 transition-transform" />
+                  <div className="grid grid-cols-2 lg:flex lg:items-center gap-2 lg:gap-4">
+                    <div className="flex items-center bg-cyan-500/15 backdrop-blur-md rounded-xl lg:rounded-2xl border border-cyan-400/30 hover:bg-cyan-500/20 transition-all group neon-border" style={{padding: 'clamp(0.5rem, 2vw, 1rem)'}}>
+                      <Trophy className="h-4 w-4 lg:h-5 lg:w-5 mr-2 lg:mr-3 text-yellow-400 group-hover:rotate-12 transition-transform" />
                       <div>
                         {user?.role === 'student' ? (
                           <>
-                            <span className="text-sm font-bold">Rank #3</span>
-                            <p className="text-xs text-gray-300">of 150</p>
+                            <span className="text-xs lg:text-sm font-bold">Rank #3</span>
+                            <p className="text-xs text-gray-300 hidden lg:block">of 150</p>
                           </>
                         ) : (
                           <>
-                            <span className="text-sm font-bold">4 Courses</span>
+                            <span className="text-xs lg:text-sm font-bold">4 Courses</span>
                             <p className="text-xs text-gray-300">Teaching</p>
                           </>
                         )}
                       </div>
                     </div>
-                    <div className="flex items-center bg-cyan-500/15 backdrop-blur-md px-4 py-3 rounded-2xl border border-cyan-400/30 hover:bg-cyan-500/20 transition-all group neon-border">
-                      <Star className="h-5 w-5 mr-3 text-cyan-400 group-hover:scale-110 transition-transform" />
+                    <div className="flex items-center bg-cyan-500/15 backdrop-blur-md rounded-xl lg:rounded-2xl border border-cyan-400/30 hover:bg-cyan-500/20 transition-all group neon-border" style={{padding: 'clamp(0.5rem, 2vw, 1rem)'}}>
+                      <Star className="h-4 w-4 lg:h-5 lg:w-5 mr-2 lg:mr-3 text-cyan-400 group-hover:scale-110 transition-transform" />
                       <div>
                         {user?.role === 'student' ? (
                           <>
-                            <span className="text-sm font-bold">CGPA 8.7</span>
+                            <span className="text-xs lg:text-sm font-bold">CGPA 8.7</span>
                             <p className="text-xs text-gray-300">Excellent</p>
                           </>
                         ) : (
                           <>
-                            <span className="text-sm font-bold">Rating 4.8</span>
+                            <span className="text-xs lg:text-sm font-bold">Rating 4.8</span>
                             <p className="text-xs text-gray-300">Faculty</p>
                           </>
                         )}
                       </div>
                     </div>
-                    <div className="flex items-center bg-cyan-500/15 backdrop-blur-md px-4 py-3 rounded-2xl border border-cyan-400/30 hover:bg-cyan-500/20 transition-all group neon-border">
-                      <Flame className="h-5 w-5 mr-3 text-red-400 group-hover:animate-bounce" />
+                    <div className="flex items-center bg-cyan-500/15 backdrop-blur-md rounded-xl lg:rounded-2xl border border-cyan-400/30 hover:bg-cyan-500/20 transition-all group neon-border" style={{padding: 'clamp(0.5rem, 2vw, 1rem)'}}>
+                      <Flame className="h-4 w-4 lg:h-5 lg:w-5 mr-2 lg:mr-3 text-red-400 group-hover:animate-bounce" />
                       <div>
                         {user?.role === 'student' ? (
                           <>
-                            <span className="text-sm font-bold">45 Day Streak</span>
+                            <span className="text-xs lg:text-sm font-bold">45 Day Streak</span>
                             <p className="text-xs text-gray-300">Keep it up!</p>
                           </>
                         ) : (
                           <>
-                            <span className="text-sm font-bold">5 Years</span>
+                            <span className="text-xs lg:text-sm font-bold">5 Years</span>
                             <p className="text-xs text-gray-300">Experience</p>
                           </>
                         )}
                       </div>
                     </div>
-                    <div className="flex items-center bg-cyan-500/15 backdrop-blur-md px-4 py-3 rounded-2xl border border-cyan-400/30 hover:bg-cyan-500/20 transition-all group neon-border">
-                      <Sparkles className="h-5 w-5 mr-3 text-purple-400 group-hover:animate-pulse" />
+                    <div className="flex items-center bg-cyan-500/15 backdrop-blur-md rounded-xl lg:rounded-2xl border border-cyan-400/30 hover:bg-cyan-500/20 transition-all group neon-border" style={{padding: 'clamp(0.5rem, 2vw, 1rem)'}}>
+                      <Sparkles className="h-4 w-4 lg:h-5 lg:w-5 mr-2 lg:mr-3 text-purple-400 group-hover:animate-pulse" />
                       <div>
                         {user?.role === 'student' ? (
                           <>
-                            <span className="text-sm font-bold">12 Badges</span>
+                            <span className="text-xs lg:text-sm font-bold">12 Badges</span>
                             <p className="text-xs text-gray-300">Earned</p>
                           </>
                         ) : (
                           <>
-                            <span className="text-sm font-bold">12 Papers</span>
+                            <span className="text-xs lg:text-sm font-bold">12 Papers</span>
                             <p className="text-xs text-gray-300">Published</p>
                           </>
                         )}
@@ -386,7 +386,7 @@ const Profile = () => {
               </div>
               
               {/* Action Buttons */}
-              <div className="pb-4 flex items-center gap-3">
+              <div className="pb-4 flex flex-col sm:flex-row items-center gap-3">
                 {!isEditing ? (
                   <>
                     <button
@@ -433,9 +433,9 @@ const Profile = () => {
         </div>
 
         {/* Enhanced Navigation Tabs */}
-        <div className="mb-8 animate-slide-up">
-          <div className="card-premium neon-border p-3">
-            <div className="flex gap-2 overflow-x-auto">
+        <div className="animate-slide-up" style={{marginBottom: 'clamp(2rem, 5vh, 3rem)'}}>
+          <div className="card-premium neon-border" style={{padding: 'clamp(0.75rem, 2vw, 1rem)'}}>
+            <div className="flex gap-3 md:gap-4 overflow-x-auto scrollbar-hide pb-1">
               {[
                 { id: 'overview', label: 'Overview', icon: User, gradient: 'from-cyan-500 to-blue-600' },
                 { id: 'academic', label: user?.role === 'student' ? 'Academic' : 'Teaching', icon: GraduationCap, gradient: 'from-purple-500 to-pink-600' },
@@ -448,14 +448,15 @@ const Profile = () => {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center px-8 py-4 rounded-2xl font-semibold transition-all whitespace-nowrap ${
+                    className={`flex items-center rounded-xl md:rounded-2xl font-semibold transition-all whitespace-nowrap text-sm md:text-base flex-shrink-0 ${
                       activeTab === tab.id
                         ? `bg-gradient-to-r ${tab.gradient} text-black shadow-lg transform scale-105`
                         : 'text-gray-300 hover:bg-gray-800 hover:text-white hover:scale-102'
                     }`}
+                    style={{padding: '0.75rem 1.5rem'}}
                   >
-                    <IconComponent className="h-5 w-5 mr-3" />
-                    {tab.label}
+                    <IconComponent className="h-4 w-4 md:h-5 md:w-5 mr-2 md:mr-3 flex-shrink-0" />
+                    <span>{tab.label}</span>
                   </button>
                 );
               })}
@@ -465,17 +466,17 @@ const Profile = () => {
 
         {/* Tab Content */}
         {activeTab === 'overview' && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-slide-up">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8 animate-slide-up">
             {/* Personal Information */}
             <div className="lg:col-span-2 card-premium neon-border">
-              <div className="px-8 py-6 border-b border-gray-800 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-t-3xl">
-                <h2 className="text-2xl font-bold text-white flex items-center">
-                  <User className="h-6 w-6 mr-3 text-cyan-400" />
+              <div className="border-b border-gray-800 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-t-3xl" style={{padding: 'clamp(1rem, 3vw, 2rem)'}}>
+                <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-white flex items-center">
+                  <User className="h-5 w-5 lg:h-6 lg:w-6 mr-2 lg:mr-3 text-cyan-400" />
                   Personal Information
                 </h2>
               </div>
-              <div className="p-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div style={{padding: 'clamp(1rem, 3vw, 2rem)'}}>
+                <div className="grid grid-cols-1 gap-4 md:gap-6">
                   <div className="group">
                     <label className="block text-sm font-bold text-gray-300 mb-4">
                       <User className="h-5 w-5 inline mr-2 text-cyan-400" />
@@ -490,7 +491,7 @@ const Profile = () => {
                         className="form-input"
                       />
                     ) : (
-                      <p className="text-white py-4 font-semibold text-lg group-hover:text-cyan-400 transition-colors">{formData.name}</p>
+                      <p className="text-white py-4 font-semibold text-base md:text-lg group-hover:text-cyan-400 transition-colors break-words">{formData.name}</p>
                     )}
                   </div>
                   
@@ -508,7 +509,7 @@ const Profile = () => {
                         className="form-input"
                       />
                     ) : (
-                      <p className="text-white py-4 font-semibold text-lg group-hover:text-green-400 transition-colors">{formData.email}</p>
+                      <p className="text-white py-4 font-semibold text-base md:text-lg group-hover:text-green-400 transition-colors break-words">{formData.email}</p>
                     )}
                   </div>
                   
@@ -531,7 +532,7 @@ const Profile = () => {
                         <option value="Chemical">Chemical</option>
                       </select>
                     ) : (
-                      <p className="text-white py-4 font-semibold text-lg group-hover:text-purple-400 transition-colors">{formData.department}</p>
+                      <p className="text-white py-4 font-semibold text-base md:text-lg group-hover:text-purple-400 transition-colors break-words">{formData.department}</p>
                     )}
                   </div>
                   
@@ -549,7 +550,7 @@ const Profile = () => {
                         className="form-input"
                       />
                     ) : (
-                      <p className="text-white py-4 font-semibold text-lg group-hover:text-orange-400 transition-colors">{formData.phone}</p>
+                      <p className="text-white py-4 font-semibold text-base md:text-lg group-hover:text-orange-400 transition-colors break-words">{formData.phone}</p>
                     )}
                   </div>
                   
@@ -567,7 +568,7 @@ const Profile = () => {
                         className="form-input"
                       />
                     ) : (
-                      <p className="text-white py-4 font-semibold text-lg group-hover:text-red-400 transition-colors">{formData.address}</p>
+                      <p className="text-white py-4 font-semibold text-base md:text-lg group-hover:text-red-400 transition-colors break-words">{formData.address}</p>
                     )}
                   </div>
                   
@@ -585,7 +586,7 @@ const Profile = () => {
                         className="form-input resize-none"
                       />
                     ) : (
-                      <p className="text-white py-4 leading-relaxed text-lg group-hover:text-indigo-400 transition-colors">{formData.bio}</p>
+                      <p className="text-white py-4 leading-relaxed text-base md:text-lg group-hover:text-indigo-400 transition-colors break-words">{formData.bio}</p>
                     )}
                   </div>
 
@@ -725,14 +726,14 @@ const Profile = () => {
             </div>
 
             {/* Stats & Skills Sidebar */}
-            <div className="space-y-6">
+            <div style={{display: 'flex', flexDirection: 'column', gap: 'clamp(1rem, 3vh, 1.5rem)'}}>
               {/* Academic Performance */}
-              <div className="card-premium neon-border p-8">
-                <h3 className="text-xl font-bold text-white mb-6 flex items-center">
-                  <TrendingUp className="h-6 w-6 mr-3 text-green-400" />
-                  {user?.role === 'student' ? 'Academic Performance' : 'Teaching Performance'}
+              <div className="card-premium neon-border" style={{padding: 'clamp(1rem, 3vw, 2rem)'}}>
+                <h3 className="text-lg md:text-xl font-bold text-white flex items-center" style={{marginBottom: 'clamp(1rem, 3vh, 1.5rem)'}}>
+                  <TrendingUp className="h-5 w-5 md:h-6 md:w-6 mr-2 md:mr-3 text-green-400" />
+                  <span className="break-words">{user?.role === 'student' ? 'Academic Performance' : 'Teaching Performance'}</span>
                 </h3>
-                <div className="space-y-6">
+                <div style={{display: 'flex', flexDirection: 'column', gap: 'clamp(1rem, 3vh, 1.5rem)'}}>
                   <div className="text-center">
                     <div className="relative w-32 h-32 mx-auto mb-4">
                       <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 120 120">
@@ -764,7 +765,7 @@ const Profile = () => {
                     <p className="text-lg font-semibold text-white">{user?.role === 'student' ? 'Excellent Performance' : 'Outstanding Teaching'}</p>
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-3 md:gap-4">
                     <div className="text-center p-4 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-2xl border border-cyan-400/30">
                       <p className="text-3xl font-bold text-cyan-400">{user?.role === 'student' ? '24' : '4'}</p>
                       <p className="text-sm text-gray-300 font-medium">{user?.role === 'student' ? 'Completed' : 'Teaching'}</p>
@@ -786,9 +787,9 @@ const Profile = () => {
               </div>
 
               {/* Top Skills */}
-              <div className="card-premium neon-border p-8">
-                <h3 className="text-xl font-bold text-white mb-6 flex items-center">
-                  <Zap className="h-6 w-6 mr-3 text-yellow-400" />
+              <div className="card-premium neon-border" style={{padding: 'clamp(1rem, 3vw, 2rem)'}}>
+                <h3 className="text-lg md:text-xl font-bold text-white flex items-center" style={{marginBottom: 'clamp(1rem, 3vh, 1.5rem)'}}>
+                  <Zap className="h-5 w-5 md:h-6 md:w-6 mr-2 md:mr-3 text-yellow-400" />
                   Top Skills
                 </h3>
                 <div className="space-y-4">
@@ -818,12 +819,12 @@ const Profile = () => {
               </div>
 
               {/* Quick Actions */}
-              <div className="card-premium neon-border p-8">
-                <h3 className="text-xl font-bold text-white mb-6 flex items-center">
-                  <Rocket className="h-6 w-6 mr-3 text-indigo-400" />
+              <div className="card-premium neon-border" style={{padding: 'clamp(1rem, 3vw, 2rem)'}}>
+                <h3 className="text-lg md:text-xl font-bold text-white flex items-center" style={{marginBottom: 'clamp(1rem, 3vh, 1.5rem)'}}>
+                  <Rocket className="h-5 w-5 md:h-6 md:w-6 mr-2 md:mr-3 text-indigo-400" />
                   Quick Actions
                 </h3>
-                <div className="space-y-3">
+                <div style={{display: 'flex', flexDirection: 'column', gap: 'clamp(0.75rem, 2vh, 1rem)'}}>
                   <button className="w-full group flex items-center px-6 py-4 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 hover:from-cyan-500/30 hover:to-blue-500/30 rounded-2xl transition-all text-cyan-400 font-semibold hover:scale-105 hover:shadow-lg border border-cyan-400/30">
                     <Download className="h-5 w-5 mr-4 group-hover:animate-bounce" />
                     {user?.role === 'student' ? 'Download Transcript' : 'Download CV'}
