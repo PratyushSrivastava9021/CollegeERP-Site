@@ -78,28 +78,28 @@ const StudentAcademic = () => {
   ]
 
   return (
-    <div className="space-y-6">
+    <div style={{display: 'flex', flexDirection: 'column', gap: 'clamp(1.5rem, 4vh, 2.5rem)'}}>
       <div>
-        <h1 className="text-3xl font-bold text-white">Academic Hub</h1>
-        <p className="text-gray-400 mt-1">Access all your academic tools and resources</p>
+        <h1 className="text-2xl md:text-3xl font-bold text-white">Academic Hub</h1>
+        <p className="text-sm md:text-base text-gray-400 mt-1">Access all your academic tools and resources</p>
       </div>
 
-      <div className="responsive-grid-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         {academicModules.map((module, index) => {
           const Icon = module.icon
           return (
             <div
               key={index}
               onClick={() => navigate(module.path)}
-              className="card-black p-6 hover:shadow-lg transition-all cursor-pointer transform hover:scale-105"
+              className="card-black hover:shadow-lg transition-all cursor-pointer transform hover:scale-105" style={{padding: 'clamp(1rem, 3vw, 1.5rem)'}}
             >
               <div className="flex items-center space-x-4">
                 <div className={`p-4 rounded-xl bg-gradient-to-r ${module.color} shadow-lg`}>
                   <Icon className="h-6 w-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-white">{module.title}</h3>
-                  <p className="text-sm text-gray-400 mt-1">{module.description}</p>
+                  <h3 className="text-base md:text-lg font-semibold text-white break-words">{module.title}</h3>
+                  <p className="text-xs md:text-sm text-gray-400 mt-1 break-words">{module.description}</p>
                 </div>
               </div>
             </div>

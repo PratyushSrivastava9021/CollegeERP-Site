@@ -121,8 +121,8 @@ const updateCourseValidation = [
     .withMessage('Max students must be at least 1')
 ];
 
-router.post('/', authorize('teacher', 'admin'), courseValidation, handleValidationErrors, createCourse);
-router.put('/:id', authorize('teacher', 'admin'), updateCourseValidation, handleValidationErrors, updateCourse);
-router.delete('/:id', authorize('teacher', 'admin'), deleteCourse);
+router.post('/', authorize('faculty', 'admin'), courseValidation, handleValidationErrors, createCourse);
+router.put('/:id', authorize('faculty', 'admin'), updateCourseValidation, handleValidationErrors, updateCourse);
+router.delete('/:id', authorize('faculty', 'admin'), deleteCourse);
 
 module.exports = router;

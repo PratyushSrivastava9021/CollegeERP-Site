@@ -69,20 +69,36 @@ const courseSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
-  schedule: {
-    days: [{
+  schedule: [{
+    day: {
       type: String,
       enum: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-    }],
+    },
     startTime: String,
     endTime: String,
     room: String
+  }],
+  syllabus: {
+    type: String,
+    maxlength: [2000, 'Syllabus cannot be more than 2000 characters']
+  },
+  prerequisites: [{
+    type: String,
+    trim: true
+  }],
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   }
 }, {
   timestamps: true
 });
 
 // Virtual for current enrollment count
+courseSchema.virtual('enrolledCount').get(function() {
+  return this.enrolledStudents.length;
+});
+
 courseSchema.virtual('currentEnrollment').get(function() {
   return this.enrolledStudents.length;
 });

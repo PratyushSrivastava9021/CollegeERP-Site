@@ -22,8 +22,13 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     setIsLoading(true)
+    
     try {
-      const result = await registerUser(data)
+      // Remove confirmPassword from data before sending
+      const { confirmPassword, ...registrationData } = data;
+      
+      const result = await registerUser(registrationData)
+      
       if (result.success) {
         toast.success('Registration successful! Welcome to College ERP.')
         navigate('/dashboard')
@@ -32,6 +37,7 @@ const Register = () => {
       }
     } catch (error) {
       toast.error('An error occurred during registration')
+      console.error('Registration error details:', error);
     } finally {
       setIsLoading(false)
     }

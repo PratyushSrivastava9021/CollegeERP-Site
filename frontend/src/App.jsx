@@ -34,7 +34,8 @@ import FacultyTeaching from './pages/FacultyTeaching'
 import Calendar from './pages/Calendar'
 import Analytics from './pages/Analytics'
 import Projects from './pages/Projects'
-import TestPage from './pages/TestPage'
+import CreateCourse from './pages/CreateCourse'
+
 
 function App() {
   const { user } = useAuth()
@@ -51,6 +52,7 @@ function App() {
         <Route path="dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="courses" element={<ProtectedRoute><Courses /></ProtectedRoute>} />
+        <Route path="courses/create" element={<ProtectedRoute requiredRole="faculty"><CreateCourse /></ProtectedRoute>} />
         <Route path="courses/:id" element={<ProtectedRoute><CourseDetail /></ProtectedRoute>} />
         <Route path="users" element={<ProtectedRoute><Users /></ProtectedRoute>} />
         
@@ -96,8 +98,7 @@ function App() {
         <Route path="analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
         <Route path="projects" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
         
-        {/* Test Route - Remove in production */}
-        <Route path="test-modal" element={<ProtectedRoute><TestPage /></ProtectedRoute>} />
+
       </Route>
     </Routes>
   )

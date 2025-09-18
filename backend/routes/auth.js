@@ -50,10 +50,21 @@ const loginValidation = [
     .withMessage('Password is required')
 ];
 
+
+
 // Routes
 router.post('/register', registerValidation, handleValidationErrors, register);
 router.post('/login', loginValidation, handleValidationErrors, login);
 router.get('/me', protect, getMe);
 router.post('/logout', protect, logout);
+
+// Test route
+router.get('/test', (req, res) => {
+  res.json({
+    success: true,
+    message: 'Auth routes are working',
+    timestamp: new Date().toISOString()
+  });
+});
 
 module.exports = router;

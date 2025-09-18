@@ -33,8 +33,8 @@ exports.userValidationRules = {
   },
   role: {
     isIn: { 
-      options: [['student', 'teacher', 'admin']], 
-      message: 'Role must be student, teacher, or admin' 
+      options: [['student', 'faculty', 'admin']], 
+      message: 'Role must be student, faculty, or admin' 
     }
   }
 };

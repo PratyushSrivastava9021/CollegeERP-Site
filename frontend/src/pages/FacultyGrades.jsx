@@ -85,7 +85,7 @@ const FacultyGrades = () => {
         <div className="floating-orb floating-orb-5"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto p-6 relative z-10">
+      <div className="max-w-7xl mx-auto p-[clamp(1rem,3vw,1.5rem)] relative z-10">
         <div className="mb-8 animate-slide-up">
           <div className="text-center mb-8">
             <h1 className="text-5xl font-black gradient-text mb-4 animate-text-glow">Grade Management</h1>
@@ -95,7 +95,7 @@ const FacultyGrades = () => {
           </div>
 
           {students.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[clamp(1rem,3vw,1.5rem)] mb-[clamp(1.5rem,4vw,2rem)]">
               <div className="card-premium p-6 hover-glow-green">
                 <div className="flex items-center">
                   <div className="bg-gradient-to-br from-green-500 to-emerald-600 p-3 rounded-xl shadow-lg shadow-green-500/25">
@@ -159,8 +159,8 @@ const FacultyGrades = () => {
           )}
         </div>
 
-        <div className="card-premium mb-8 animate-slide-up hover-glow-cyan p-6">
-          <div className="flex items-center gap-4">
+        <div className="card-premium mb-[clamp(1.5rem,4vw,2rem)] animate-slide-up hover-glow-cyan p-[clamp(1rem,3vw,1.5rem)]">
+          <div className="flex items-center gap-[clamp(0.75rem,2vw,1rem)]">
             <div className="flex-1">
               <label className="block text-sm font-medium text-gray-300 mb-2">Course</label>
               <div className="relative">
@@ -181,13 +181,13 @@ const FacultyGrades = () => {
         </div>
 
         <div className="card-premium neon-border animate-slide-up">
-          <div className="p-6 border-b border-gray-800">
-            <h3 className="text-2xl font-bold text-white flex items-center">
+          <div className="p-[clamp(1rem,3vw,1.5rem)] border-b border-gray-800">
+            <h3 className="text-[clamp(1.25rem,4vw,2rem)] font-bold text-white flex items-center">
               <Award className="h-6 w-6 mr-3 text-cyan-400" />
               Student Grades
             </h3>
           </div>
-          <div className="p-6">
+          <div className="p-[clamp(1rem,3vw,1.5rem)]">
             {students.length === 0 ? (
               <div className="text-center py-12">
                 <Users className="w-16 h-16 text-gray-500 mx-auto mb-4" />
@@ -199,40 +199,40 @@ const FacultyGrades = () => {
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-gray-800">
-                      <th className="text-left py-4 px-4 text-gray-300 font-semibold">Student</th>
-                      <th className="text-left py-4 px-4 text-gray-300 font-semibold">Email</th>
-                      <th className="text-center py-4 px-4 text-gray-300 font-semibold">Marks</th>
-                      <th className="text-center py-4 px-4 text-gray-300 font-semibold">Grade</th>
+                      <th className="text-left py-[clamp(0.75rem,2vw,1rem)] px-[clamp(0.5rem,1.5vw,1rem)] text-gray-300 font-semibold text-[clamp(0.875rem,2.5vw,1rem)]">Student</th>
+                      <th className="text-left py-[clamp(0.75rem,2vw,1rem)] px-[clamp(0.5rem,1.5vw,1rem)] text-gray-300 font-semibold text-[clamp(0.875rem,2.5vw,1rem)] hidden sm:table-cell">Email</th>
+                      <th className="text-center py-[clamp(0.75rem,2vw,1rem)] px-[clamp(0.5rem,1.5vw,1rem)] text-gray-300 font-semibold text-[clamp(0.875rem,2.5vw,1rem)]">Marks</th>
+                      <th className="text-center py-[clamp(0.75rem,2vw,1rem)] px-[clamp(0.5rem,1.5vw,1rem)] text-gray-300 font-semibold text-[clamp(0.875rem,2.5vw,1rem)]">Grade</th>
                     </tr>
                   </thead>
                   <tbody>
                     {students.map((s) => (
                       <tr key={s._id} className="border-b border-gray-800/50 hover:bg-gray-800/30 transition-colors">
-                        <td className="py-4 px-4">
+                        <td className="py-[clamp(0.75rem,2vw,1rem)] px-[clamp(0.5rem,1.5vw,1rem)]">
                           <div className="flex items-center">
-                            <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center text-sm font-bold text-black mr-3">
+                            <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center text-[clamp(0.75rem,2vw,0.875rem)] font-bold text-black mr-3">
                               {s.name.split(' ').map(n => n[0]).join('')}
                             </div>
-                            <span className="font-medium text-white">{s.name}</span>
+                            <span className="font-medium text-white text-[clamp(0.875rem,2.5vw,1rem)]">{s.name}</span>
                           </div>
                         </td>
-                        <td className="py-4 px-4 text-gray-300">{s.email}</td>
-                        <td className="py-4 px-4 text-center">
+                        <td className="py-[clamp(0.75rem,2vw,1rem)] px-[clamp(0.5rem,1.5vw,1rem)] text-gray-300 text-[clamp(0.75rem,2vw,0.875rem)] hidden sm:table-cell break-all">{s.email}</td>
+                        <td className="py-[clamp(0.75rem,2vw,1rem)] px-[clamp(0.5rem,1.5vw,1rem)] text-center">
                           <input 
                             type="number" 
                             min="0" 
                             max="100" 
                             value={grades[s._id]?.marks || ''} 
                             onChange={(e) => updateGrade(s._id, 'marks', e.target.value)}
-                            className="form-input w-24 h-10 text-center" 
+                            className="form-input w-[clamp(4rem,8vw,6rem)] h-10 text-center text-[clamp(0.75rem,2vw,0.875rem)]" 
                             placeholder="0-100"
                           />
                         </td>
-                        <td className="py-4 px-4 text-center">
+                        <td className="py-[clamp(0.75rem,2vw,1rem)] px-[clamp(0.5rem,1.5vw,1rem)] text-center">
                           <select 
                             value={grades[s._id]?.grade || ''} 
                             onChange={(e) => updateGrade(s._id, 'grade', e.target.value)}
-                            className="form-select h-10 w-24"
+                            className="form-select h-10 w-[clamp(4rem,8vw,6rem)] text-[clamp(0.75rem,2vw,0.875rem)]"
                           >
                             <option value="">Grade</option>
                             <option value="A+">A+</option>
@@ -252,7 +252,7 @@ const FacultyGrades = () => {
               </div>
             )}
             {students.length > 0 && (
-              <div className="mt-6 flex justify-end">
+              <div className="mt-[clamp(1rem,3vw,1.5rem)] flex justify-end">
                 <button onClick={saveGrades} className="btn-primary">
                   <Save className="w-5 h-5 mr-2" />
                   Save Grades

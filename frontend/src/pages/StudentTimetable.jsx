@@ -35,13 +35,13 @@ const StudentTimetable = () => {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
+    <div style={{display: 'flex', flexDirection: 'column', gap: 'clamp(1.5rem, 4vh, 2.5rem)'}}>
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-white">My Timetable</h1>
-          <p className="text-gray-400 mt-1">View your weekly schedule</p>
+          <h1 className="text-2xl md:text-3xl font-bold text-white">My Timetable</h1>
+          <p className="text-sm md:text-base text-gray-400 mt-1">View your weekly schedule</p>
         </div>
-        <div className="flex space-x-3">
+        <div className="flex flex-col sm:flex-row gap-3">
           <button className="btn-outline flex items-center">
             <Download className="h-4 w-4 mr-2" />
             Export
@@ -53,31 +53,31 @@ const StudentTimetable = () => {
         </div>
       </div>
 
-      <div className="card-black p-3 sm:p-6">
+      <div className="card-black" style={{padding: 'clamp(0.75rem, 3vw, 1.5rem)'}}>
         <div className="overflow-x-auto">
-          <div className="grid grid-cols-6 gap-2 sm:gap-4 min-w-[600px]">
-          <div className="font-semibold text-gray-400 text-sm">Time</div>
+          <div className="grid grid-cols-6 min-w-[600px]" style={{gap: 'clamp(0.5rem, 2vw, 1rem)'}}>
+          <div className="font-semibold text-gray-400 text-xs md:text-sm">Time</div>
           {days.map(day => (
-            <div key={day} className="font-semibold text-gray-300 text-sm text-center">
+            <div key={day} className="font-semibold text-gray-300 text-xs md:text-sm text-center break-words">
               {day}
             </div>
           ))}
 
           {timeSlots.map(timeSlot => (
             <>
-              <div key={timeSlot} className="py-4 text-sm text-gray-400 font-medium border-t border-gray-700/50">
+              <div key={timeSlot} className="py-2 md:py-4 text-xs md:text-sm text-gray-400 font-medium border-t border-gray-700/50">
                 {timeSlot}
               </div>
               {days.map(day => (
-                <div key={`${day}-${timeSlot}`} className="py-4 border-t border-gray-700/50">
+                <div key={`${day}-${timeSlot}`} className="py-2 md:py-4 border-t border-gray-700/50">
                   {timetableData[day]?.[timeSlot] ? (
-                    <div className="bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/30 rounded-lg p-3 text-sm">
-                      <div className="font-semibold text-white">{timetableData[day][timeSlot].subject}</div>
-                      <div className="text-gray-300 text-xs mt-1">{timetableData[day][timeSlot].teacher}</div>
-                      <div className="text-gray-400 text-xs">{timetableData[day][timeSlot].room}</div>
+                    <div className="bg-gradient-to-r from-blue-600/20 to-cyan-600/20 border border-blue-500/30 rounded-lg p-2 md:p-3 text-xs md:text-sm">
+                      <div className="font-semibold text-white break-words">{timetableData[day][timeSlot].subject}</div>
+                      <div className="text-gray-300 text-xs mt-1 break-words">{timetableData[day][timeSlot].teacher}</div>
+                      <div className="text-gray-400 text-xs break-words">{timetableData[day][timeSlot].room}</div>
                     </div>
                   ) : (
-                    <div className="h-16"></div>
+                    <div className="h-12 md:h-16"></div>
                   )}
                 </div>
               ))}

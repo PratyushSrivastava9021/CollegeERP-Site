@@ -85,10 +85,10 @@ const FacultyTeaching = () => {
   ]
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-[clamp(1.5rem,4vw,2.5rem)]">
       <div>
-        <h1 className="text-3xl font-bold text-white">Teaching Hub</h1>
-        <p className="text-gray-400 mt-1">Manage all your teaching activities and student interactions</p>
+        <h1 className="text-[clamp(1.75rem,5vw,3rem)] font-bold text-white">Teaching Hub</h1>
+        <p className="text-gray-400 mt-[clamp(0.25rem,1vw,0.5rem)] text-[clamp(0.875rem,2.5vw,1rem)]">Manage all your teaching activities and student interactions</p>
       </div>
 
       <div className="responsive-grid-3">
@@ -98,15 +98,15 @@ const FacultyTeaching = () => {
             <div
               key={index}
               onClick={() => navigate(module.path)}
-              className="card-black p-6 hover:shadow-lg transition-all cursor-pointer transform hover:scale-105"
+              className="card-black p-[clamp(1rem,3vw,1.5rem)] hover:shadow-lg transition-all cursor-pointer transform hover:scale-105"
             >
-              <div className="flex items-center space-x-4">
-                <div className={`p-4 rounded-xl bg-gradient-to-r ${module.color} shadow-lg`}>
-                  <Icon className="h-6 w-6 text-white" />
+              <div className="flex items-center space-x-[clamp(0.75rem,2vw,1rem)]">
+                <div className={`p-[clamp(0.75rem,2vw,1rem)] rounded-xl bg-gradient-to-r ${module.color} shadow-lg`}>
+                  <Icon className="h-[clamp(1.25rem,3vw,1.5rem)] w-[clamp(1.25rem,3vw,1.5rem)] text-white" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-white">{module.title}</h3>
-                  <p className="text-sm text-gray-400 mt-1">{module.description}</p>
+                  <h3 className="text-[clamp(1rem,3vw,1.125rem)] font-semibold text-white">{module.title}</h3>
+                  <p className="text-[clamp(0.75rem,2vw,0.875rem)] text-gray-400 mt-[clamp(0.25rem,1vw,0.5rem)]">{module.description}</p>
                 </div>
               </div>
             </div>

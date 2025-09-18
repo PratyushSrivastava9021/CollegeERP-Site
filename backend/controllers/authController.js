@@ -16,26 +16,12 @@ exports.register = async (req, res) => {
       });
     }
 
-    // Check if studentId already exists (if provided)
-    if (studentId) {
-      const existingStudentId = await User.findOne({ studentId });
-      if (existingStudentId) {
-        return res.status(400).json({
-          success: false,
-          message: 'Student ID already exists'
-        });
-      }
-    }
-
-    // Normalize role
-    const normalizedRole = ['student', 'faculty', 'admin'].includes(role) ? role : 'student';
-
     // Create user
     const user = await User.create({
       name,
       email,
       password,
-      role: normalizedRole,
+      role: role || 'student',
       studentId,
       department
     });
@@ -89,14 +75,6 @@ exports.login = async (req, res) => {
       return res.status(401).json({
         success: false,
         message: 'Invalid credentials'
-      });
-    }
-
-    // Check if user is active
-    if (!user.isActive) {
-      return res.status(401).json({
-        success: false,
-        message: 'Account is deactivated'
       });
     }
 
@@ -173,7 +151,7 @@ exports.getMe = async (req, res) => {
   }
 };
 
-// @desc    Logout user / clear cookie
+// @desc    Logout user
 // @route   POST /api/auth/logout
 // @access  Private
 exports.logout = async (req, res) => {

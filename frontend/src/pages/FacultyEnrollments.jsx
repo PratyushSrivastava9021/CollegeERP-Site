@@ -31,12 +31,12 @@ const FacultyEnrollments = () => {
   useEffect(() => { loadEnrollments(selected) }, [selected])
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Course Enrollments</h1>
+    <div className="space-y-[clamp(1.5rem,4vw,2.5rem)]">
+      <h1 className="text-[clamp(1.75rem,5vw,2.5rem)] font-bold">Course Enrollments</h1>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">Select Course</label>
-        <select value={selected} onChange={(e) => setSelected(e.target.value)} className="border rounded px-3 py-2 w-full md:w-80">
+        <label className="block text-[clamp(0.875rem,2.5vw,1rem)] font-medium text-gray-700 mb-[clamp(0.25rem,1vw,0.5rem)]">Select Course</label>
+        <select value={selected} onChange={(e) => setSelected(e.target.value)} className="border rounded px-3 py-[clamp(0.5rem,1.5vw,0.75rem)] w-full md:w-80 text-[clamp(0.875rem,2.5vw,1rem)]">
           <option value="">Choose a course</option>
           {courses.map((c) => (
             <option key={c._id} value={c._id}>{c.title} ({c.code})</option>
@@ -45,29 +45,29 @@ const FacultyEnrollments = () => {
       </div>
 
       <div className="bg-white border rounded-lg">
-        <div className="p-4 border-b flex items-center space-x-2">
+        <div className="p-[clamp(1rem,3vw,1.5rem)] border-b flex items-center space-x-2">
           <Users className="h-5 w-5 text-primary-600" />
-          <h2 className="font-semibold">Enrolled Students</h2>
+          <h2 className="font-semibold text-[clamp(1rem,3vw,1.125rem)]">Enrolled Students</h2>
         </div>
-        <div className="p-4">
+        <div className="p-[clamp(1rem,3vw,1.5rem)]">
           {enrollments.length === 0 ? (
-            <p className="text-gray-600">No enrollments to show.</p>
+            <p className="text-gray-600 text-[clamp(0.875rem,2.5vw,1rem)]">No enrollments to show.</p>
           ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full text-sm">
+              <table className="min-w-full text-[clamp(0.75rem,2vw,0.875rem)]">
                 <thead>
                   <tr className="text-left border-b">
-                    <th className="py-2 pr-4">Name</th>
-                    <th className="py-2 pr-4">Email</th>
-                    <th className="py-2 pr-4">Date</th>
+                    <th className="py-[clamp(0.5rem,1.5vw,0.75rem)] pr-4 font-medium">Name</th>
+                    <th className="py-[clamp(0.5rem,1.5vw,0.75rem)] pr-4 font-medium">Email</th>
+                    <th className="py-[clamp(0.5rem,1.5vw,0.75rem)] pr-4 font-medium">Date</th>
                   </tr>
                 </thead>
                 <tbody>
                   {enrollments.map((en) => (
-                    <tr key={en._id} className="border-b">
-                      <td className="py-2 pr-4">{en.studentId?.name}</td>
-                      <td className="py-2 pr-4">{en.studentId?.email}</td>
-                      <td className="py-2 pr-4">{new Date(en.date).toLocaleDateString()}</td>
+                    <tr key={en._id} className="border-b hover:bg-gray-50">
+                      <td className="py-[clamp(0.5rem,1.5vw,0.75rem)] pr-4">{en.studentId?.name}</td>
+                      <td className="py-[clamp(0.5rem,1.5vw,0.75rem)] pr-4 break-all">{en.studentId?.email}</td>
+                      <td className="py-[clamp(0.5rem,1.5vw,0.75rem)] pr-4 whitespace-nowrap">{new Date(en.date).toLocaleDateString()}</td>
                     </tr>
                   ))}
                 </tbody>

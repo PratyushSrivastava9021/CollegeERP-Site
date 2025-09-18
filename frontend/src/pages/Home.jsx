@@ -134,7 +134,7 @@ const Home = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative h-screen min-h-[100vh] min-h-[100dvh] flex items-center justify-center overflow-hidden">
         {/* Floating Orbs */}
         <div className="absolute inset-0">
           <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-cyan-500/20 rounded-full blur-3xl animate-float"></div>
@@ -142,7 +142,7 @@ const Home = () => {
           <div className="absolute top-3/4 left-3/4 w-64 h-64 bg-purple-500/15 rounded-full blur-3xl animate-float" style={{animationDelay: '4s'}}></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-[5vw] text-center">
           {/* Logo with Glow Effect */}
           <div className="mb-8 relative">
             <div className="relative inline-block">
@@ -153,21 +153,21 @@ const Home = () => {
           </div>
 
           {/* Main Heading */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight">
+          <h1 className="font-black mb-6 leading-tight" style={{fontSize: 'clamp(2.5rem, 8vw, 5rem)'}}>
             <span className="gradient-text">Prat-Verse</span>
             <br />
             <span className="text-white">College ERP</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed" style={{fontSize: 'clamp(1rem, 3vw, 1.5rem)'}}>
             Experience the future of academic management with our 
             <span className="text-cyan-400 font-semibold"> AI-powered platform</span> that transforms 
             how institutions operate and students learn.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center" style={{marginBottom: 'clamp(3rem, 8vh, 6rem)'}}>
             {user ? (
               <Link to="/dashboard" className="btn-primary text-lg px-8 py-4 group">
                 <span className="flex items-center">
@@ -196,7 +196,7 @@ const Home = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 max-w-4xl mx-auto" style={{gap: 'clamp(1rem, 4vw, 2rem)'}}>
             {stats.map((stat, index) => {
               const Icon = stat.icon;
               return (
@@ -214,20 +214,20 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-32 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative" style={{paddingTop: 'clamp(4rem, 12vh, 8rem)', paddingBottom: 'clamp(4rem, 12vh, 8rem)'}}>
+        <div className="max-w-7xl mx-auto" style={{paddingLeft: 'clamp(1rem, 5vw, 2rem)', paddingRight: 'clamp(1rem, 5vw, 2rem)'}}>
           {/* Section Header */}
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+            <h2 className="font-bold text-white mb-6" style={{fontSize: 'clamp(2rem, 6vw, 3.75rem)'}}>
               Why Choose Our <span className="gradient-text">Platform</span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-gray-300 max-w-3xl mx-auto" style={{fontSize: 'clamp(1rem, 2.5vw, 1.25rem)'}}>
               Built with cutting-edge technology to deliver unmatched performance and user experience.
             </p>
           </div>
 
           {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style={{gap: 'clamp(1rem, 4vw, 2rem)'}}>
             {features.map((feature, index) => {
               const Icon = feature.icon;
               const colorClasses = {
@@ -268,13 +268,13 @@ const Home = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-32 relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative" style={{paddingTop: 'clamp(4rem, 12vh, 8rem)', paddingBottom: 'clamp(4rem, 12vh, 8rem)'}}>
+        <div className="max-w-7xl mx-auto" style={{paddingLeft: 'clamp(1rem, 5vw, 2rem)', paddingRight: 'clamp(1rem, 5vw, 2rem)'}}>
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
+            <h2 className="font-bold text-white mb-6" style={{fontSize: 'clamp(2rem, 6vw, 3.75rem)'}}>
               Loved by <span className="gradient-text">Thousands</span>
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            <p className="text-gray-300 max-w-3xl mx-auto" style={{fontSize: 'clamp(1rem, 2.5vw, 1.25rem)'}}>
               See what our users have to say about their experience with our platform.
             </p>
           </div>
@@ -282,7 +282,7 @@ const Home = () => {
           <div className="relative max-w-4xl mx-auto">
             <div className="card-black p-12 text-center">
               <div className="text-6xl mb-6">{testimonials[currentTestimonial].avatar}</div>
-              <blockquote className="text-2xl text-gray-300 mb-8 leading-relaxed">
+              <blockquote className="text-gray-300 mb-8 leading-relaxed" style={{fontSize: 'clamp(1.125rem, 3vw, 1.5rem)'}}>
                 "{testimonials[currentTestimonial].content}"
               </blockquote>
               <div className="text-white font-bold text-lg">{testimonials[currentTestimonial].name}</div>
@@ -306,14 +306,14 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 relative">
+      <section className="relative" style={{paddingTop: 'clamp(4rem, 12vh, 8rem)', paddingBottom: 'clamp(4rem, 12vh, 8rem)'}}>
         <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10"></div>
         
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">
+        <div className="relative z-10 max-w-7xl mx-auto text-center" style={{paddingLeft: 'clamp(1rem, 5vw, 2rem)', paddingRight: 'clamp(1rem, 5vw, 2rem)'}}>
+          <h2 className="font-bold text-white mb-8" style={{fontSize: 'clamp(2rem, 6vw, 3.75rem)'}}>
             Ready to <span className="gradient-text">Transform</span> Your Institution?
           </h2>
-          <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
+          <p className="text-gray-300 mb-12 max-w-3xl mx-auto" style={{fontSize: 'clamp(1rem, 2.5vw, 1.25rem)'}}>
             Join thousands of institutions worldwide who trust our platform for their academic management needs.
           </p>
           

@@ -87,70 +87,70 @@ const StudentGrades = () => {
         <div className="floating-orb floating-orb-5"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto p-6 relative z-10">
-        <div className="mb-8 animate-slide-up">
-          <div className="text-center mb-8">
-            <h1 className="text-5xl font-black gradient-text mb-4 animate-text-glow">My Grades</h1>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+      <div className="max-w-7xl mx-auto relative z-10" style={{padding: 'clamp(1rem, 4vw, 2rem)'}}>
+        <div className="animate-slide-up" style={{marginBottom: 'clamp(2rem, 6vh, 3rem)'}}>
+          <div className="text-center" style={{marginBottom: 'clamp(2rem, 5vh, 3rem)'}}>
+            <h1 className="text-3xl md:text-5xl font-black gradient-text mb-4 animate-text-glow">My Grades</h1>
+            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
               Track your academic performance and celebrate your achievements
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div className="card-premium p-6 hover-glow-green">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6" style={{marginBottom: 'clamp(2rem, 5vh, 3rem)'}}>
+            <div className="card-premium hover-glow-green" style={{padding: 'clamp(1rem, 3vw, 1.5rem)'}}>
               <div className="flex items-center">
                 <div className="bg-gradient-to-br from-green-500 to-emerald-600 p-3 rounded-xl shadow-lg shadow-green-500/25">
                   <BarChart3 className="w-6 h-6 text-white" />
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-400 uppercase tracking-wider">Average</p>
+                  <p className="text-xs md:text-sm font-medium text-gray-400 uppercase tracking-wider">Average</p>
                   <div className="flex items-center">
-                    <p className="text-2xl font-bold text-white">{stats.avg}%</p>
+                    <p className="text-xl md:text-2xl font-bold text-white">{stats.avg}%</p>
                     <TrendingUp className="w-4 h-4 text-green-400 ml-2" />
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="card-premium p-6 hover-glow-cyan">
+            <div className="card-premium hover-glow-cyan" style={{padding: 'clamp(1rem, 3vw, 1.5rem)'}}>
               <div className="flex items-center">
                 <div className="bg-gradient-to-br from-cyan-500 to-blue-600 p-3 rounded-xl shadow-lg shadow-cyan-500/25">
                   <Trophy className="w-6 h-6 text-black" />
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-400 uppercase tracking-wider">Highest</p>
+                  <p className="text-xs md:text-sm font-medium text-gray-400 uppercase tracking-wider">Highest</p>
                   <div className="flex items-center">
-                    <p className="text-2xl font-bold text-white">{stats.highest}%</p>
+                    <p className="text-xl md:text-2xl font-bold text-white">{stats.highest}%</p>
                     <Star className="w-4 h-4 text-cyan-400 ml-2" />
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="card-premium p-6 hover-glow-purple">
+            <div className="card-premium hover-glow-purple" style={{padding: 'clamp(1rem, 3vw, 1.5rem)'}}>
               <div className="flex items-center">
                 <div className="bg-gradient-to-br from-purple-500 to-violet-600 p-3 rounded-xl shadow-lg shadow-purple-500/25">
                   <Award className="w-6 h-6 text-white" />
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-400 uppercase tracking-wider">GPA</p>
+                  <p className="text-xs md:text-sm font-medium text-gray-400 uppercase tracking-wider">GPA</p>
                   <div className="flex items-center">
-                    <p className="text-2xl font-bold text-white">{stats.gpa}</p>
+                    <p className="text-xl md:text-2xl font-bold text-white">{stats.gpa}</p>
                     <Medal className="w-4 h-4 text-purple-400 ml-2" />
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="card-premium p-6 hover-glow-orange">
+            <div className="card-premium hover-glow-orange" style={{padding: 'clamp(1rem, 3vw, 1.5rem)'}}>
               <div className="flex items-center">
                 <div className="bg-gradient-to-br from-orange-500 to-red-500 p-3 rounded-xl shadow-lg shadow-orange-500/25">
                   <BookOpen className="w-6 h-6 text-white" />
                 </div>
                 <div className="ml-4">
-                  <p className="text-sm font-medium text-gray-400 uppercase tracking-wider">Subjects</p>
+                  <p className="text-xs md:text-sm font-medium text-gray-400 uppercase tracking-wider">Subjects</p>
                   <div className="flex items-center">
-                    <p className="text-2xl font-bold text-white">{rows.length}</p>
+                    <p className="text-xl md:text-2xl font-bold text-white">{rows.length}</p>
                     <BookOpen className="w-4 h-4 text-orange-400 ml-2" />
                   </div>
                 </div>
@@ -160,40 +160,40 @@ const StudentGrades = () => {
         </div>
 
         <div className="card-premium neon-border animate-slide-up">
-          <div className="p-6 border-b border-gray-800">
-            <h3 className="text-2xl font-bold text-white flex items-center">
+          <div className="border-b border-gray-800" style={{padding: 'clamp(1rem, 3vw, 1.5rem)'}}>
+            <h3 className="text-lg md:text-2xl font-bold text-white flex items-center">
               <Award className="h-6 w-6 mr-3 text-cyan-400" />
               Academic Results
             </h3>
           </div>
-          <div className="p-6">
+          <div style={{padding: 'clamp(1rem, 3vw, 1.5rem)'}}>
             {rows.length === 0 ? (
               <div className="text-center py-12">
                 <BookOpen className="w-16 h-16 text-gray-500 mx-auto mb-4" />
-                <p className="text-xl text-gray-400 mb-2">No grades available</p>
-                <p className="text-gray-500">Your grades will appear here once published by faculty</p>
+                <p className="text-lg md:text-xl text-gray-400 mb-2">No grades available</p>
+                <p className="text-sm md:text-base text-gray-500">Your grades will appear here once published by faculty</p>
               </div>
             ) : (
-              <div className="space-y-4">
+              <div style={{display: 'flex', flexDirection: 'column', gap: 'clamp(1rem, 2vh, 1.5rem)'}}>
                 {rows.map((r) => (
-                  <div key={r._id} className="flex items-center justify-between p-6 bg-gray-800/50 rounded-2xl hover:bg-gray-700/50 transition-all">
+                  <div key={r._id} className="flex flex-col lg:flex-row lg:items-center lg:justify-between bg-gray-800/50 rounded-2xl hover:bg-gray-700/50 transition-all gap-4 lg:gap-0" style={{padding: 'clamp(1rem, 3vw, 1.5rem)'}}>
                     <div className="flex items-center">
                       <div className="bg-cyan-500/20 p-4 rounded-xl mr-6">
                         <BookOpen className="w-6 h-6 text-cyan-400" />
                       </div>
                       <div>
-                        <p className="font-bold text-white text-lg">{r.courseId?.title}</p>
-                        <p className="text-sm text-gray-400">{r.courseId?.code}</p>
+                        <p className="font-bold text-white text-base md:text-lg break-words">{r.courseId?.title}</p>
+                        <p className="text-xs md:text-sm text-gray-400">{r.courseId?.code}</p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-6">
+                    <div className="flex items-center justify-between lg:space-x-6">
                       <div className="text-center">
-                        <p className="text-2xl font-bold text-white">{r.marks || 0}</p>
-                        <p className="text-sm text-gray-400">Marks</p>
+                        <p className="text-xl md:text-2xl font-bold text-white">{r.marks || 0}</p>
+                        <p className="text-xs md:text-sm text-gray-400">Marks</p>
                       </div>
                       <div className={`flex items-center px-4 py-2 rounded-full border ${getGradeColor(r.grade)}`}>
                         {getGradeIcon(r.grade)}
-                        <span className="ml-2 font-bold text-lg">{r.grade || 'N/A'}</span>
+                        <span className="ml-2 font-bold text-base md:text-lg">{r.grade || 'N/A'}</span>
                       </div>
                     </div>
                   </div>

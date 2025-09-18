@@ -36,7 +36,8 @@ const Layout = () => {
     if (user.role === 'student') {
       return [
         ...baseNav,
-        { name: 'Academic', href: '/student/academic', icon: BookOpen },
+        { name: 'Enroll', href: '/student/enroll', icon: BookOpen },
+        { name: 'Academic', href: '/student/academic', icon: GraduationCap },
         { name: 'Messages', href: '/messages', icon: Send },
         { name: 'Library', href: '/library', icon: Library },
         { name: 'Profile', href: '/profile', icon: User },
@@ -47,8 +48,18 @@ const Layout = () => {
       return [
         ...baseNav,
         { name: 'Teaching', href: '/faculty/teaching', icon: GraduationCap },
+        { name: 'Enrollments', href: '/faculty/enrollments', icon: BookOpen },
         { name: 'Messages', href: '/messages', icon: Send },
         { name: 'Library', href: '/library', icon: Library },
+        { name: 'Profile', href: '/profile', icon: User },
+      ]
+    }
+
+    if (user.role === 'admin') {
+      return [
+        ...baseNav,
+        { name: 'Users', href: '/users', icon: User },
+        { name: 'Analytics', href: '/analytics', icon: GraduationCap },
         { name: 'Profile', href: '/profile', icon: User },
       ]
     }
